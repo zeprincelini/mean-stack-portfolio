@@ -1,0 +1,29 @@
+<div class="container-fluid login">
+  <div class="row">
+    <div class="col-sm-12">
+      <span class="pull-left logo"><img src="../../assets/images/mylogo.png" width="90px" height="auto" class="img-responsive"></span>
+      <h2 class="header text-center">
+        Please <span class = "linker">Login</span> DonLini
+      </h2>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+        <div class="main-body">
+          <form (ngSubmit) = "onLogin(f)" #f = "ngForm">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)] = "loginUserData.username" placeholder="username" name="username" ngModel required #username = "ngModel">
+              <span class="help-block" *ngIf = "!username.valid && username.touched">please enter a valid username</span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" [(ngModel)] = "loginUserData.password" placeholder="password" name="password" ngModel required>
+            </div>
+            <button class="btn btn-default btn-lg" type="submit" (click) = "login()">Login Bro</button>
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span class="footer">
+  <p>2018 © DonLini.io All Rights Reserved.</p>
+</span>

@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="row">
+              <div class="col-sm-12 text-center head">
+                  <h2>Welcome DonLini</h2>
+              </div>
+          </div>
+      </div>
+      <div class="floating-btn" [ngStyle] = "{display: display}">
+        <img src="../../assets/vectors/float.jpg" alt="" 
+        width='130px' height= 'auto' class="img-responsive" role="button" (click)='appear()'>
+    </div>
+    <!--To be set to display none-->
+    <div class="row section" [ngClass] = "{section: show}" *ngIf = "dash; else nodash">
+        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div class="row text-center">
+                <div class="col-sm-6 col-xs-6">
+                    <div class="dashboard" (click) = "toDash()">
+                        <figure>
+                            <img src="../../assets/vectors/dash.png" width="80x" height="auto">
+                            <h1>
+                                Dashboard
+                            </h1>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                    <div class="add" (click) = "toAdd()">
+                        <figure>
+                            <img src="../../assets/vectors/add.png" width="80x" height="auto">
+                            <h1>
+                                Add New
+                            </h1>
+                        </figure>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                <div class="logout text-center">
+                    <figure>
+                        <img src="../../assets/vectors/cls.png" width="80x" height="auto">
+                            <h1>
+                               Log out
+                            </h1>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #nodash>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <!-- <div class="panel panel-default">
+                    <div class ="panel-heading">
+                         <div class="row">
+                             <div class="col-sm-2 col-sm-offset-2">
+                                 <a href="">Dashboard</a>
+                             </div>
+                             <div class="col-sm-2 col-sm-offset-2">
+                                 <a href="">Add new</a>
+                             </div>
+                         </div>
+                     </div>
+                    <div class = "panel-body">
+                         <router-outlet></router-outlet>
+                    </div>
+                    <div class = "panel-footer">
+     
+                    </div>
+                </div> -->
+                <nav mat-tab-nav-bar>
+                    <a mat-tab-link *ngFor="let link of navLinks"
+                    [routerLink]="link.link"
+                    routerLinkActive #rla="routerLinkActive"
+                    [active]="rla.isActive" class="mat-app-background">
+                        {{link.label}}
+                    </a>
+                </nav>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+      </ng-template>
+  </div>
+</div>
+<footer>
+    <p>2018 © DonLini.io All Rights Reserved.</p>
+</footer>

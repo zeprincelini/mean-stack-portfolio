@@ -1,0 +1,32 @@
+<div class="cover">
+  <div class="aside">
+    <div class="brand">
+      <a href="#"><img src="../../assets/images/mylogo.png" width="150px" height="auto" class="img-responsive"></a>
+    </div>
+    <div class="space">
+    </div>
+    <div class="side-bar">
+      <ul class="nav nav-pills nav-stacked" id="side">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/"><span class="fa fa-home"></span>&nbsp;Home</a></li>
+        <li routerLinkActive="active"><a routerLink="/skills"><span class="fa fa-plus"></span>&nbsp;Skills</a></li>
+        <li routerLinkActive="active"><a routerLink="/portfolio"><span class="fa fa-sign-out-alt"></span>&nbsp;portfolio</a></li>
+        <li routerLinkActive="active"><a routerLink="/about"><span class="fa fa-sign-out-alt"></span>&nbsp;About</a></li>
+        <li routerLinkActive="active"><a routerLink="/contact"><span class="fa fa-sign-out-alt"></span>&nbsp;Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<a href="#" class="mob-brand"><img src="../../assets/images/mylogo.png" width="150px" height="auto" class="img-responsive"></a>
+<span class="ham" (click)= "open = !open"><img src="../../assets/vectors/menu1.png" width="30px" height="auto"></span>
+<div class="side-bar-mob" *ngIf = "open">
+  <!--span class="ham"><img src="../../assets/vectors/menu1.png" width="30px" height="auto"></span-->
+  <ul class="nav nav-pills nav-stacked" id="side">
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/" (click)= "open = false"><span class="fa fa-home"></span>&nbsp;Home</a></li>
+    <li routerLinkActive="active"><a routerLink="/skills" (click)= "open = false"><span class="fa fa-plus"></span>&nbsp;Skills</a></li>
+    <li routerLinkActive="active"><a routerLink="/portfolio" (click)= "open = false"><span class="fa fa-sign-out-alt"></span>&nbsp;portfolio</a></li>
+    <li routerLinkActive="active"><a routerLink="/about" (click)= "open = false"><span class="fa fa-sign-out-alt"></span>&nbsp;About</a></li>
+    <li routerLinkActive="active"><a routerLink="/contact" (click)= "open = false"><span class="fa fa-sign-out-alt"></span>&nbsp;Contact</a></li>
+  </ul>
+</div>

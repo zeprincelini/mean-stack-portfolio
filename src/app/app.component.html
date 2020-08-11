@@ -1,0 +1,18 @@
+    <div *ngIf = "root; else noRoot" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1 mine-sm-1">
+                <app-header></app-header>
+            </div>
+            <div class="col-sm-11 mine-sm-11">
+                <router-outlet></router-outlet>
+                <app-footer></app-footer> 
+            </div> 
+        </div>
+    </div>
+
+
+    <ng-template #noRoot>
+        <router-outlet></router-outlet>
+    </ng-template>
+ 
+  

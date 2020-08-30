@@ -30,10 +30,10 @@ figure:last-child{margin-top: 3px;}
 figure:hover{
     cursor: pointer;
 }
-mat-icon{
+figure > mat-icon{
     font-size: 40px;
-   position: relative;
-   top: 45px;
+    position: relative;
+    top: 45px;
 }
 .dashboard{
     background-color: #851e3e;
@@ -69,4 +69,9 @@ footer{
     right: 5px;
     top: 100px;
     display: none;
+}
+.logout2{
+    position: absolute;
+    right: 10px;
+    top: 30px;
 }

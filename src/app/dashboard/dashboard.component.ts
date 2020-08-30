@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 })
 export class DashboardComponent implements OnInit {
 show = true;
+log= false;
 display = '';
 dash = true;
 navLinks: any[];
@@ -51,6 +52,7 @@ activeLinkIndex = -1;
   appear(){
     this.show = !this.show;
     this.display= 'none';
+    this.log = !this.log;
   }
   toDash(){
     this.router.navigate(['dashview'], {relativeTo: this.currentRoute});

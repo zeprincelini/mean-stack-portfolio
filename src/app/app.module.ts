@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
-import {HttpClientModule} from '@angular/common/http';
+import {MatIconModule} from '@angular/material/icon';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,9 +22,15 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashviewComponent } from './dashview/dashview.component';
 import { AddComponent } from './add/add.component';
-import { DashhomeComponent } from './dashhome/dashhome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service';
+import { DashboardService } from './dashboard.service';
+import { SafePipe } from './safe.pipe';
+import { EditComponent } from './edit/edit.component';
+import { Base64 } from './base64.pipe';
+import { ShortenPipe } from './shorten.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, data: {showRootComponents: true}},
@@ -32,11 +39,11 @@ const appRoutes: Routes = [
   {path: 'about', component: AboutComponent, data: {showRootComponents: true}},
   {path: 'contact', component: ContactComponent, data: {showRootComponents: true}},
   {path: 'login', component: LoginComponent, data: {showRootComponents: false}},
-  {path: 'dashboard', component: DashboardComponent, data: {showRootComponents: false}, children:[
-    {path: 'dashhome', component: DashhomeComponent},
+  {path: 'dashboard', component: DashboardComponent,  canActivate: [AuthGuard], data: {showRootComponents: false}, children:[
     {path: 'dashview', component: DashviewComponent},
-    {path: 'add', component: AddComponent}
+    {path: 'add', component: AddComponent},
   ]},
+  {path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -56,18 +63,27 @@ const appRoutes: Routes = [
     DashboardComponent,
     DashviewComponent,
     AddComponent,
-    DashhomeComponent
+    SafePipe,
+    Base64,
+   ShortenPipe,
+    EditComponent
   ],
   imports: [
     BrowserModule,
     MatTabsModule,
+    MatIconModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, DashboardService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

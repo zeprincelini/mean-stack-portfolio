@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit {
-
-  constructor() { }
+data = [{}];
+  constructor(private dashService: DashboardService) { }
 
   ngOnInit() {
+    this.dashService.getPosts()
+    .subscribe(
+      res => this.data = res,
+      err => console.log(err)
+    )
   }
 
 }

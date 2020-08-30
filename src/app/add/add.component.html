@@ -1,3 +1,25 @@
-<p>
-  add works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <form action="" class="myForm" enctype="multipart/form-data" [formGroup] = "uploadForm" (ngSubmit) = "postBody()">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="title" placeholder="File name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="url" placeholder="Url">
+        </div>
+        <div class="form-group">
+          <input type="file" class="form-control" name="img" placeholder="image" (change) ="uploadFile($event)">
+        </div>
+        <div class="form-group">
+          <select formControlName="type" class="form-control">
+            <option *ngFor = "let val of values">{{val}}</option>
+          </select>
+        </div>
+        <div class="myButton">
+          <button class="btn btn-success pull-right">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

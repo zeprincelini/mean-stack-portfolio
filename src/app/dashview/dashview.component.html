@@ -1,14 +1,24 @@
 <div class="row">
   <div class="col-sm-12">
-    <h1>
-      Dashboard
-    </h1>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover text-center">
+        <tr class="myTable">
+          <!-- <th class="text-center">SN</th> -->
+          <th class="text-center">Published</th>
+          <th class="text-center">Title</th>
+          <th class="text-center">Thumbnail</th>
+          <th class="actions text-center">Actions</th>
+        </tr>
+        <tr *ngFor = "let posts of postData">
+          <!-- <td>no</td> -->
+          <td *ngIf ="posts.date">{{posts.date |shorten}}</td>
+          <td>{{posts.title}}</td>
+          <td><img [src]= "'../assets/uploads/'+posts.name"  alt="not found"
+            *ngIf = "posts.name" width="100px" height="auto"></td>
+          <td><a [routerLink] = "['/edit/', posts._id]"><mat-icon class="edit-icon">create</mat-icon></a>
+            <a (click) = "onDelete(posts._id)" class="del"><mat-icon class="del-icon">delete</mat-icon></a>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
-<div class="row">
-</div>
-<!--mat-tab-group>
-  <mat-tab label = "A">Apple</mat-tab>
-  <mat-tab label = "b">bean</mat-tab>
-  <mat-tab label = "c">cicadas</mat-tab>
-</mat-tab-group-->

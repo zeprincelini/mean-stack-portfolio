@@ -1,0 +1,19 @@
+.table>tbody>tr.myTable{
+    background: #5cb85c;
+}
+.table>tbody>tr>th.actions{
+    background-color: #6F0000;
+}
+th{
+    color: #ffffff;
+}
+
+.del:hover{
+    cursor: pointer;
+}
+.del-icon{
+    color: #6F0000;
+}
+.edit-icon{
+    color: #5cb85c;
+}

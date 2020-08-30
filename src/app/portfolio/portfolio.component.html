@@ -3,22 +3,26 @@
     <div class="col-sm-12 work-main-header">
       <h1>Portfolio</h1>
     </div>
-    <div class="col-sm-12 panel panel-default">
-     <div class="col-sm-4">
+    <div class="row">
       <div class="col-sm-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-              <p>images holding stars</p>
+        <div class="panel panel-primary">
+        <div class="row text-center">
+          <div class="col-sm-3" *ngFor = "let posts of data">
+            <a href="{{posts.url}}">
+              <figure>
+                <img [src]= "'../assets/uploads/'+posts.name"  alt="not found" 
+                *ngIf = "posts.name" width="200px" height="auto" class="img-fluid">
+                <figcaption>
+                  {{posts.title}}
+                  <p>{{posts.type}}</p>
+                </figcaption>
+              </figure>
+            </a>
           </div>
-          <div class="panel-body">
-            <img src="#">
-          </div>
-          <div class="panel-footer">
-            <p>work title</p>
-          </div>
+          <!-- <div class ="clear"> </div> -->
+        </div>
         </div>
       </div>
-     </div>
     </div>
   </div>
 </div>

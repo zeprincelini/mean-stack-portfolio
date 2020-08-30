@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>
+        Edit
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <form action="" class="myForm" enctype="multipart/form-data" [formGroup] = "updateForm">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="title" value="{{data.title}}">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="url" value="{{data.url}}">
+        </div>
+        <div class="form-group">
+          <input type="file" class="form-control" name ="img" (change) ="uploadFile($event)">
+          <img [src] ="'../assets/uploads/'+data.name" class="img-responsive" width="200" height="auto" *ngIf ="data.name">
+        </div>
+        <div class="form-group">
+          <select formControlName="type" class="form-control">
+            <option *ngFor = "let val of values">{{val}}</option>
+          </select>
+        </div>
+        <div class="myButton">
+          <button class="btn btn-success pull-right" (click) = "postUpdate()">Update</button>
+          <button class="btn btn-primary pull-left" (click) = "goBack()">back</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -18,33 +18,36 @@
                 <div class="col-sm-6 col-xs-6">
                     <div class="dashboard" (click) = "toDash()">
                         <figure>
-                            <img src="../../assets/vectors/dash.png" width="80x" height="auto">
-                            <h1>
+                            <!-- <img src="../../assets/vectors/dash.png" width="80x" height="auto"> -->
+                            <mat-icon>dashboard</mat-icon>
+                            <!-- <h1>
                                 Dashboard
-                            </h1>
+                            </h1> -->
                         </figure>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-6">
                     <div class="add" (click) = "toAdd()">
                         <figure>
-                            <img src="../../assets/vectors/add.png" width="80x" height="auto">
-                            <h1>
+                            <!-- <img src="../../assets/vectors/add.png" width="80x" height="auto"> -->
+                            <mat-icon>add</mat-icon>
+                            <!-- <h1>
                                 Add New
-                            </h1>
+                            </h1> -->
                         </figure>
                     </div>
                 </div> 
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+            <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" (click) = "logOut()">
                 <div class="logout text-center">
                     <figure>
-                        <img src="../../assets/vectors/cls.png" width="80x" height="auto">
-                            <h1>
+                        <!-- <img src="../../assets/vectors/cls.png" width="80x" height="auto"> -->
+                        <mat-icon>exit_to_app</mat-icon>
+                            <!-- <h1>
                                Log out
-                            </h1>
+                            </h1> -->
                     </figure>
                 </div>
             </div>
@@ -53,29 +56,11 @@
     <ng-template #nodash>
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                <!-- <div class="panel panel-default">
-                    <div class ="panel-heading">
-                         <div class="row">
-                             <div class="col-sm-2 col-sm-offset-2">
-                                 <a href="">Dashboard</a>
-                             </div>
-                             <div class="col-sm-2 col-sm-offset-2">
-                                 <a href="">Add new</a>
-                             </div>
-                         </div>
-                     </div>
-                    <div class = "panel-body">
-                         <router-outlet></router-outlet>
-                    </div>
-                    <div class = "panel-footer">
-     
-                    </div>
-                </div> -->
                 <nav mat-tab-nav-bar>
                     <a mat-tab-link *ngFor="let link of navLinks"
                     [routerLink]="link.link"
                     routerLinkActive #rla="routerLinkActive"
-                    [active]="rla.isActive" class="mat-app-background">
+                    [active]="rla.isActive">
                         {{link.label}}
                     </a>
                 </nav>
@@ -85,6 +70,9 @@
       </ng-template>
   </div>
 </div>
-<footer>
+<div class="logout-btn">
+    <mat-icon (click) = "logOut()">exit_to_app</mat-icon>
+</div>
+<footer *ngIf = "dash">
     <p>2018 © DonLini.io All Rights Reserved.</p>
 </footer>

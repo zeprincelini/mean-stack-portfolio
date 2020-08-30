@@ -182,7 +182,9 @@ router.delete('/dashboard/dashview/:id',upload, (req, res) => {
            return res.send(`error deleting post wuth id ${req.params.id}`);
            }
            let path = doc.path;
-           fs.unlink(path);
+           fs.unlink(path, (err) => {
+               console.log(err);
+           });
            res.send(doc);
     });
 });

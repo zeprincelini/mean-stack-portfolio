@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, FormsModule } from '@angular/forms';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-//@Output() bodyHolder = new EventEmitter<object>();
+postSuccess = false;
 uploadForm: FormGroup;
 data = {};
 values = ["Web Development", "Graphic Design", "Ui/Ux Design", "Android Design"];
@@ -19,7 +19,7 @@ obID: any;
       title: [''],
       url: [''],
       img: [null],
-      type: [0]
+      type: ["Web Development"]
     })
   }
 
@@ -44,7 +44,7 @@ postBody(){
 
   this.dashService.postDash(formData)
   .subscribe(
-    res => alert('Post added successfully')
+    res => this.postSuccess = true
   ,
     err => alert('error adding post ' + err)
   )

@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
+  editSuccess = false;
   values = ["Web Development", "Graphic Design", "Ui/Ux Design", "Android Design"];
   updateForm: FormGroup;
   currentUrl;
@@ -53,7 +54,7 @@ postUpdate(){
   this.currentUrl = this.activeRoute.snapshot.params;
   this.dashService.updatePost(this.currentUrl.id, formData)
   .subscribe(
-    res => alert("update successful"),
+    res => this.editSuccess = true,
     err => console.log(err)
   )
 }

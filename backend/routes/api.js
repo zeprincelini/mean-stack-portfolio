@@ -6,7 +6,7 @@ const objectID = require('mongoose').Types.ObjectId;
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
-let GridFsStorage = require('multer-gridfs-storage');
+const bcrypt = require('bcrypt');
 
 //let gfs = mongoose.connection.db;
 const User = require('../models/user');
@@ -52,17 +52,27 @@ router.get('/', (req, res) => {
 });
 
 // router.post('/register', (req, res) => {
-    // let userData = req.body;
-    // let user = new User(userData);
     
-    // user.save((error, registeredUser) => {
+    // bcrypt.hash(req.body.password, 10).then((hash) => {
+        // let userData = req.body;
+        // let user = new User({
+            // username: req.body.username,
+            // password: hash
+        // });
+        // user.save((error, registeredUser) => {
         // if(error){
            // return console.log('error saving user');
         // }
         // let payload = { subject: userData._id };
         // let token = jwt.sign(payload, 'secretKey');
         // res.status(200).send(token);
+        // console.log(registeredUser);
     // });
+    // });
+    
+    // let userData = req.body;
+    // // let user = new User(userData);
+    
 // });
 router.post('/login', (req, res) => {
     let loginData = req.body;
@@ -72,16 +82,22 @@ router.post('/login', (req, res) => {
             console.log(error);
         }else{
             if(!user){
-                res.status(401).send('Invalid username or password');
-            }else{
-                if(user.password !== loginData.password){
-                    res.status(401).send('Invalid password');
-                }else{
+                return res.status(401).send('Invalid username or password');
+            }
+                bcrypt.compare(req.body.password, user.password).then((valid) => {
+                   if(!valid){
+                       return res.status(401).json({
+                           error : new Error("Incorrect password")
+                       });
+                   }
                     let payload = { subject: loginData._id };
                     let token = jwt.sign(payload, 'secretKey');
-                    res.status(200).send({token});
-                }
-            }
+                    res.status(200).send({token});                   
+                }).catch((err) => {
+                   res.status(500).json({
+                       error: error
+                   }) 
+                });   
         }
     });
 });

@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  logError = false;
   loginUserData = {};
   constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router) { }
 
@@ -25,7 +26,14 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard']);
         localStorage.setItem('token', res.token);
       },
-      err => console.log(err)
+      err => {this.logError = true}
     )
   }
+  // register(){
+  //   this.auth.registerUser(this.loginUserData)
+  //   .subscribe(
+  //     res => console.log(res),
+  //     err => console.log(err)
+  //   )
+  // }
 }

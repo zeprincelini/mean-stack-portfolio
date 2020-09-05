@@ -4,20 +4,26 @@
       <h1>Contact me</h1>
     </div>
     <div class="col-sm-6 col-sm-offset-3 myform">
-      <form action="" method="POST">
+      <div class="alert alert-success" *ngIf = "mailSuccess">
+        Email sent successfully
+      </div>
+      <div class="alert alert-danger" *ngIf = "mailError">
+        Error sending email
+      </div>
+      <form (ngSubmit) = "submit()" #contact = "ngForm">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" class="form-control">
+          <input type="text" id="name" class="form-control"  [(ngModel)]="user.name" name="name">
         </div>
         <div class="form-group">
           <label for=email>Email</label>
-          <input type="email" id="email" class="form-control">
+          <input type="email" id="email" class="form-control" [(ngModel)]="user.email" name="email">
         </div>
         <div class="form-group">
           <label for="job">Job request</label>
-         <textarea class="form-control" rows="5" id="job"></textarea>
+         <textarea class="form-control" rows="5" id="job" [(ngModel)]="user.job" name="job"></textarea>
         </div>
-        <button type="submit" class="btn btn-success pull-right">Submit</button>
+        <button class="btn btn-success pull-right">Submit</button>
       </form>
     </div>
   </div>

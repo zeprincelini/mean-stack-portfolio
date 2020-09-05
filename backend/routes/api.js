@@ -7,6 +7,9 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+//const mailgun = require('mailgun-js')({process.env.MAILGUN_DOMAIN, process.env.MAILGUN_API});
+require("dotenv").config()
 
 //let gfs = mongoose.connection.db;
 const User = require('../models/user');
@@ -202,6 +205,36 @@ router.delete('/dashboard/dashview/:id',upload, (req, res) => {
                console.log(err);
            });
            res.send(doc);
+    });
+});
+
+router.post('/contact/send', (req, res) => {
+        let transporter = nodemailer.createTransport({
+       host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        requireTLS: true,
+        auth: {
+            user: process.env.user,
+            pass: process.env.pass
+        }
+    });
+    
+    let mailOptions = {
+        from: process.env.user,
+        to: 'princelini4@gmail.com',
+        subject: req.body.email + ' Developer Job',
+        text: "Name: "+ req.body.name + " Job Request: " + req.body.job
+    }
+    
+    transporter.sendMail(mailOptions, (err, data) => {
+       if(err){
+           console.log('Error, try again', err);
+           res.status(500).send('Error, try again');
+       }else{
+           res.status(200).send('Email sent successfully');
+           console.log(data);
+       }
     });
 });
 

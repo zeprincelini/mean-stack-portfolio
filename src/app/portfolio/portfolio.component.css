@@ -38,7 +38,7 @@ figure:hover{
 }
 figcaption{
     font-family: 'Girassol', cursive;
-    color: #ffffff;
+    color: #000;
 }
 figure p{
     font-family: 'Girassol', cursive;
@@ -52,13 +52,13 @@ figure p{
     clear: both;
 } */
 
-@media (min-width: 768px){
+  @media (min-width: 768px){
     .row.auto-clear .col-sm-3:nth-child(4n+1){
         clear: left;
     }
-}
+} 
 
-/* .row.auto-clear{
+ /* .row.auto-clear{
     -moz-column-width: 19em;
     -webkit-column-width: 19em;
     -moz-column-gap: 1em;
@@ -68,7 +68,8 @@ figure p{
     display: inline-block;
     padding: .5rem;
     width: 100%;
-} */
+}  */
+
 
 /* .row.auto-clear{
     display: flex;

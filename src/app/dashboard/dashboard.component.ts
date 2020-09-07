@@ -52,15 +52,16 @@ activeLinkIndex = -1;
   appear(){
     this.show = !this.show;
     this.display= 'none';
-    this.log = !this.log;
   }
   toDash(){
     this.router.navigate(['dashview'], {relativeTo: this.currentRoute});
     this.dash = !this.dash;
+    this.log = !this.log;
   }
   toAdd(){
     this.router.navigate(['add'], {relativeTo: this.currentRoute});
     this.dash = !this.dash;
+    this.log = !this.log;
   }
 
   logOut(){

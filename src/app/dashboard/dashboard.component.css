@@ -69,9 +69,14 @@ footer{
     right: 5px;
     top: 100px;
     display: none;
+    color: #6F0000;
+}
+.logout2:hover{
+    cursor: pointer;
 }
 .logout2{
     position: absolute;
     right: 10px;
     top: 30px;
+    color: #6F0000;
 }

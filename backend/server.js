@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 //js includes
 const api = require('./routes/api');
 
@@ -21,7 +22,7 @@ app.use(express.static('../dist/myportfolio'));
 app.use('/api', api);
 
 app.get('/*', (req, res) => {
-    res.sendFile('../dist/myportfolio/index.html');
+    res.sendFile(path.join(__dirname, '../dist/myportfolio', 'index1.html'));
 });
 
 app.listen(PORT, () => {

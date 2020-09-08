@@ -54,29 +54,29 @@ router.get('/', (req, res) => {
     res.send('Hello from Api route');
 });
 
-// router.post('/register', (req, res) => {
+router.post('/register', (req, res) => {
     
-    // bcrypt.hash(req.body.password, 10).then((hash) => {
-        // let userData = req.body;
-        // let user = new User({
-            // username: req.body.username,
-            // password: hash
-        // });
-        // user.save((error, registeredUser) => {
-        // if(error){
-           // return console.log('error saving user');
-        // }
-        // let payload = { subject: userData._id };
-        // let token = jwt.sign(payload, 'secretKey');
-        // res.status(200).send(token);
-        // console.log(registeredUser);
-    // });
-    // });
+    bcrypt.hash(req.body.password, 10).then((hash) => {
+        let userData = req.body;
+        let user = new User({
+            username: req.body.username,
+            password: hash
+        });
+        user.save((error, registeredUser) => {
+        if(error){
+           return console.log('error saving user');
+        }
+        let payload = { subject: userData._id };
+        let token = jwt.sign(payload, 'secretKey');
+        res.status(200).send(token);
+        console.log(registeredUser);
+    });
+    });
     
-    // let userData = req.body;
-    // // let user = new User(userData);
+    //let userData = req.body;
+    // let user = new User(userData);
     
-// });
+});
 router.post('/login', (req, res) => {
     let loginData = req.body;
     

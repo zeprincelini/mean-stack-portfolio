@@ -10,7 +10,7 @@
       <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
         <div class = "alert alert-danger" role="alert" *ngIf = "logError">Username or Password Incorrect</div>
         <div class="main-body">
-          <form (ngSubmit) = "onLogin(f)" #f = "ngForm">
+          <form (ngSubmit) = "login()" #f = "ngForm">
             <div class="form-group">
               <input type="text" class="form-control" [(ngModel)] = "loginUserData.username" placeholder="username" name="username" required #username = "ngModel">
               <span class="help-block" *ngIf = "!username.valid && username.touched">please enter a valid username</span>
@@ -18,7 +18,7 @@
             <div class="form-group">
               <input type="password" class="form-control" [(ngModel)] = "loginUserData.password" placeholder="password" name="password" required>
             </div>
-            <button class="btn btn-default btn-lg" type="submit" (click) = "login()">Login Bro</button>
+            <button class="btn btn-default btn-lg" type="submit">Login Bro</button>
           </form> 
         </div>
       </div>

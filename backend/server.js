@@ -17,6 +17,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 app.use(express.static('uploads'));
+app.use(express.static('../dist');
 app.use('/api', api);
 
 app.get('/', (req, res) => {

@@ -20,7 +20,7 @@ app.use(express.static('uploads'));
 app.use('/api', api);
 
 app.get('/', (req, res) => {
-    res.send('hello from the server');
+    res.sendFile('../dist/myportfolio/index.html');
 });
 
 app.listen(PORT, () => {

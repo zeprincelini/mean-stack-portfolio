@@ -14,7 +14,12 @@ export class EditComponent implements OnInit {
   values = ["Web Development", "Graphic Design", "Ui/Ux Design", "Android Design"];
   updateForm: FormGroup;
   currentUrl;
-  data = {};
+  data : any = {
+    title: "",
+    url : "",
+    name : ""
+  };
+  
   constructor(private activeRoute: ActivatedRoute, private dashService: DashboardService, private fb: FormBuilder,
     private location: Location) { 
     this.updateForm = this.fb.group({

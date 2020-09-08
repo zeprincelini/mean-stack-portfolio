@@ -10,10 +10,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactComponent implements OnInit {
 @ViewChild('contact') contact: NgForm;
-user = {};
+user : any = {
+  email: "",
+job: "",
+name: ""
+};
 contactForm: FormGroup;
 mailSuccess = false;
-mailError = false
+mailError = false;
+
   constructor(private contactService: ContactService) {
    }
 

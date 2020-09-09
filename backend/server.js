@@ -22,7 +22,7 @@ app.use(express.static('../dist/myportfolio'));
 app.use('/api', api);
 
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/myportfolio', 'index1.html'));
+    res.sendFile(path.join(__dirname, '../dist/myportfolio', 'index.html'));
 });
 
 app.listen(PORT, () => {

@@ -10,7 +10,7 @@
           <div class="col-sm-3" *ngFor = "let posts of data">
             <a href="{{posts.url}}">
               <figure>
-                <img [src]= "'../assets/uploads/'+posts.name"  alt="not found" 
+                <img [src]= "'assets/uploads/'+posts.name"  alt="not found" 
                 *ngIf = "posts.name" width="200px" height="auto" class="img-fluid">
                 <figcaption>
                   {{posts.title}}

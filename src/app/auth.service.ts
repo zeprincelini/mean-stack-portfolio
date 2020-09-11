@@ -6,8 +6,14 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = "http://localhost:3000/api/login";
-  private registerUrl = "http://localhost:3000/api/register";
+  //dev
+  // private loginUrl = "http://localhost:3000/api/login";
+  // private registerUrl = "http://localhost:3000/api/register";
+
+  //prod
+  private loginUrl = "api/login";
+  private registerUrl = "api/register";
+
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user){

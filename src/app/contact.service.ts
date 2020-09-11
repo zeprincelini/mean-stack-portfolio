@@ -5,7 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ContactService {
-  private emailUrl = "http://localhost:3000/api/contact/send";
+  //dev
+  // private emailUrl = "http://localhost:3000/api/contact/send";
+
+  //prod
+  private emailUrl = "api/contact/send";
+
   constructor(private http: HttpClient) { }
   mail(body){
     return this.http.post<any>(this.emailUrl, body, {responseType: 'text' as 'json'});

@@ -34,17 +34,6 @@
     text-align: center;
 }
 
-.first, .second, .third, .fourth{
-    /*box-sizing: border-box !important;
-	box-shadow: 0.5px 0.5px 0.5px #888 !important;
-    transition: box-shadow 0.3s;*/
-}
-
-/*.first, .second, .third, .fourth:hover{
-    box-shadow: 2px 2px 2px #888 !important;
-    transition: box-shadow 0.3s;
-}*/
-
 .first{ min-height: 300px;}
 .second{ min-height: 250px;}
 .third{ min-height: 300px;}

@@ -6,9 +6,16 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  private dashboardUrl = "http://localhost:3000/api/dashboard";
+  //dev
+  /* private dashboardUrl = "http://localhost:3000/api/dashboard";
   private dashPostUrl = "http://localhost:3000/api/dashboard/add";
-  private getPostUrl = "http://localhost:3000/api/dashboard/dashview";
+  private getPostUrl = "http://localhost:3000/api/dashboard/dashview"; */
+
+  //prod
+
+  private dashboardUrl = "api/dashboard";
+  private dashPostUrl = "api/dashboard/add";
+  private getPostUrl = "api/dashboard/dashview";
   startedEdit = new Subject<any>();
 
   constructor(private http: HttpClient) { }

@@ -13,7 +13,7 @@
           <!-- <td>no</td> -->
           <td *ngIf ="posts.date">{{posts.date |shorten}}</td>
           <td>{{posts.title}}</td>
-          <td><img [src]= "'../assets/uploads/'+posts.name"  alt="not found"
+          <td><img [src]= "'assets/uploads/'+posts.name"  alt="not found"
             *ngIf = "posts.name" width="100px" height="auto"></td>
           <td><a [routerLink] = "['/edit/', posts._id]"><mat-icon class="edit-icon">create</mat-icon></a>
             <a (click) = "onDelete(posts._id)" class="del"><mat-icon class="del-icon">delete</mat-icon></a>

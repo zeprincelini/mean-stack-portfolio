@@ -9,7 +9,7 @@ export class ContactService {
   // private emailUrl = "http://localhost:3000/api/contact/send";
 
   //prod
-  private emailUrl = "api/contact/send";
+  private emailUrl = "https://shielded-ocean-66356.herokuapp.com/api/contact/send";
 
   constructor(private http: HttpClient) { }
   mail(body){

@@ -11,8 +11,8 @@ export class AuthService {
   // private registerUrl = "http://localhost:3000/api/register";
 
   //prod
-  private loginUrl = "api/login";
-  private registerUrl = "api/register";
+  private loginUrl = "https://shielded-ocean-66356.herokuapp.com/api/login";
+  private registerUrl = "https://shielded-ocean-66356.herokuapp.com/api/register";
 
   constructor(private http: HttpClient, private router: Router) { }
 

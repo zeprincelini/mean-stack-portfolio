@@ -12,10 +12,9 @@ export class DashboardService {
   private getPostUrl = "http://localhost:3000/api/dashboard/dashview"; */
 
   //prod
-
-  private dashboardUrl = "api/dashboard";
-  private dashPostUrl = "api/dashboard/add";
-  private getPostUrl = "api/dashboard/dashview";
+  private dashboardUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard";
+  private dashPostUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard/add";
+  private getPostUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard/dashview";
   startedEdit = new Subject<any>();
 
   constructor(private http: HttpClient) { }

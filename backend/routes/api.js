@@ -127,7 +127,7 @@ router.post("/dashboard/add", upload, (req, res) => {
         type: req.body.type,
         img: {
             //data: fs.readFileSync('../src/assets/uploads/' + req.file.originalname),
-            data: fs.readFileSync(path.join(__dirname, '/assets/uploads/') + req.file.originalname),
+            data: fs.readFileSync(path.join(__dirname, 'assets/uploads/') + req.file.originalname),
             contentType: 'image/png'
         },
         name: req.file.originalname,

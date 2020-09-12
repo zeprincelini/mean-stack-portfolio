@@ -41,7 +41,9 @@ function verifyToken(req, res, next){
 }
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../src/assets/uploads/')
+        //cb(null, '../src/assets/uploads/')
+         cb(null, path.join(__dirname, '/assets/uploads'))
+        
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)

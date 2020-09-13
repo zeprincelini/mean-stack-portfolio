@@ -177,7 +177,7 @@ router.put('/dashboard/dashview/:id', upload, (req, res) => {
          title: req.body.title,
          type: req.body.type,
          img: {
-            data: fs.readFileSync('../src/assets/uploads/' + req.file.originalname),
+            data: fs.readFileSync(path.join(__dirname, 'assets/uploads/') + req.file.originalname),
             contentType: 'image/png'
          },
           name: req.file.originalname,
@@ -242,4 +242,4 @@ router.post('/contact/send', (req, res) => {
 });
 
 
-module.exports = router;
+module.exports = router;g

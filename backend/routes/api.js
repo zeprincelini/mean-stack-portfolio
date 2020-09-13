@@ -137,7 +137,7 @@ router.post("/dashboard/add", upload, (req, res) => {
     });
     obj.save((err, item) => {
         if(err){
-            console.log(err);
+            res.status(401).send(err);
         }
         res.send(item);
         console.log(item)
@@ -233,7 +233,7 @@ router.post('/contact/send', (req, res) => {
     transporter.sendMail(mailOptions, (err, data) => {
        if(err){
            console.log('Error, try again', err);
-           res.status(500).send('Error, try again');
+           res.status(500).send('Error, try again ' + err);
        }else{
            res.status(200).send('Email sent successfully');
            console.log(data);

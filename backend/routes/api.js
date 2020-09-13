@@ -242,4 +242,4 @@ router.post('/contact/send', (req, res) => {
 });
 
 
-module.exports = router;g
+module.exports = router;

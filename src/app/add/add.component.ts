@@ -46,7 +46,7 @@ postBody(){
   .subscribe(
     res => this.postSuccess = true
   ,
-    err => alert('error adding post ' + err)
+    err => console.log(err)
   )
 }
 }

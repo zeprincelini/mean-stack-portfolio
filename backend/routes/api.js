@@ -62,7 +62,7 @@ cloudinary.config({
     const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'some-folder-name',
+    folder: 'portfolio-asset',
     format: async (req, file) => 'png', // supports promises as well
     public_id: (req, file) => 'computed-filename-using-request',
   },

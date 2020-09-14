@@ -155,7 +155,7 @@ router.post("/dashboard/add", parser.single('img'), (req, res) => {
     });
     obj.save((err, item) => {
         if(err){
-            res.status(401).send(err);
+            return res.send(err);
         }
         res.send(item);
         console.log(item)

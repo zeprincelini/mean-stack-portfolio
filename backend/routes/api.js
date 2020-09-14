@@ -186,7 +186,7 @@ router.get('/dashboard/dashview/:id', (req, res) => {
     });
 });
 
-router.put('/dashboard/dashview/:id', upload, (req, res) => {
+router.put('/dashboard/dashview/:id', /*upload,*/ (req, res) => {
     let mydate = new Date();
      if(!objectID.isValid(req.params.id)){
         return res.status(400).send(err + `no post with given id ${req.params.id}`);
@@ -194,14 +194,15 @@ router.put('/dashboard/dashview/:id', upload, (req, res) => {
    let postUpdate = {
          title: req.body.title,
          type: req.body.type,
-         img: {
-            data: fs.readFileSync(path.resolve(__dirname, 'assets/uploads/') + req.file.originalname),
-            contentType: 'image/png'
-         },
-          name: req.file.originalname,
-          path: req.file.path,
+         // img: {
+            // data: fs.readFileSync(path.resolve(__dirname, 'assets/uploads/') + req.file.originalname),
+            // contentType: 'image/png'
+         // },
+          // name: req.file.originalname,
+          // path: req.file.path,
           date: mydate,
-          url: req.body.url
+          //url: req.body.url
+           url: req.file.url
    };
    Post.findByIdAndUpdate(req.params.id, {$set: postUpdate}, {new: true}, (err, doc) => {
        if(err){
@@ -211,7 +212,7 @@ router.put('/dashboard/dashview/:id', upload, (req, res) => {
    });
 });
 
-router.delete('/dashboard/dashview/:id',upload, (req, res) => {
+router.delete('/dashboard/dashview/:id',/*upload,*/ (req, res) => {
     if(!objectID.isValid(req.params.id)){
         return res.status(400).send(err + `no post with given id ${req.params.id}`);
     }

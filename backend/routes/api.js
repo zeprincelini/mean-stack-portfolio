@@ -6,6 +6,8 @@ const objectID = require('mongoose').Types.ObjectId;
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 //const mailgun = require('mailgun-js')({process.env.MAILGUN_DOMAIN, process.env.MAILGUN_API});
@@ -39,17 +41,31 @@ function verifyToken(req, res, next){
     //console.log(req.userId);
   
 }
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        //cb(null, '../src/assets/uploads/')
-         cb(null, path.join(__dirname, '/assets/uploads'))
+
+// let storage = multer.diskStorage({
+    // destination: (req, file, cb) => {
+        // //cb(null, '../src/assets/uploads/')
+         // cb(null, path.join(__dirname, '/assets/uploads'))
         
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-});
-let upload = multer({ storage: storage }).single('img');
+    // },
+    // filename: (req, file, cb) => {
+        // cb(null, file.originalname)
+    // }
+// });
+// let upload = multer({ storage: storage }).single('img');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+    });
+    const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "portfolio-asset",
+    allowedFormats: ["jpg", "png"],
+    transformation: [{ width: 500, height: 500, crop: "limit" }]
+  });
+    const parser = multer({ storage: storage });
 
 
 router.get('/', (req, res) => {
@@ -117,23 +133,23 @@ router.get("/dashboard", verifyToken, (req, res) => {
     })
 });
 
-router.post("/dashboard/add", upload, (req, res) => {
+router.post("/dashboard/add", parser.single('img'), (req, res) => {
     // console.log(req.body);
-    // console.log(req.file);
+    console.log(req.file);
     let mydate = new Date();
     
     let obj = new Post({
         title: req.body.title,
         type: req.body.type,
-        img: {
-            //data: fs.readFileSync('../src/assets/uploads/' + req.file.originalname),
-            data: fs.readFileSync(path.resolve(__dirname, 'assets/uploads/') + req.file.originalname),
-            contentType: 'image/png'
-        },
-        name: req.file.originalname,
-        path: req.file.path,
+        // img: {
+            // //data: fs.readFileSync('../src/assets/uploads/' + req.file.originalname),
+            // data: fs.readFileSync(path.resolve(__dirname, 'assets/uploads/') + req.file.originalname),
+            // contentType: 'image/png'
+        // },
+        //name: req.file.originalname,
+        //path: req.file.path,
         date: mydate,
-        url: req.body.url
+        url: req.file.url
     });
     obj.save((err, item) => {
         if(err){

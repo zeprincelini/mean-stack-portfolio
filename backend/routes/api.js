@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 //const mailgun = require('mailgun-js')({process.env.MAILGUN_DOMAIN, process.env.MAILGUN_API});
@@ -59,12 +59,14 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
  });
-    const storage = new cloudinaryStorage({
-    cloudinary: cloudinary,
-    folder: "portfolio-asset",
-    allowedFormats: ["jpg", "png"],
-    transformation: [{ width: 500, height: 500, crop: "limit" }]
-  });
+    const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'some-folder-name',
+    format: async (req, file) => 'png', // supports promises as well
+    public_id: (req, file) => 'computed-filename-using-request',
+  },
+});
     const parser = multer({ storage: storage });
 
 

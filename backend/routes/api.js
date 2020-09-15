@@ -6,14 +6,12 @@ const objectID = require('mongoose').Types.ObjectId;
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-//const mailgun = require('mailgun-js')({process.env.MAILGUN_DOMAIN, process.env.MAILGUN_API});
 require("dotenv").config()
 
-//let gfs = mongoose.connection.db;
 const User = require('../models/user');
 const Post = require('../models/post');
 
@@ -59,15 +57,15 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
  });
-    const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'portfolio-asset',
-    format: async (req, file) => 'png', // supports promises as well
-    public_id: (req, file) => 'computed-filename-using-request',
-  },
-});
-    const parser = multer({ storage: storage });
+    // const storage = new CloudinaryStorage({
+  // cloudinary: cloudinary,
+  // params: {
+    // folder: 'portfolio-asset',
+    // format: async (req, file) => 'png', // supports promises as well
+    // public_id: (req, file) => 'computed-filename-using-request',
+  // },
+// });
+    // const parser = multer({ storage: storage });
 
 
 router.get('/', (req, res) => {
@@ -135,31 +133,28 @@ router.get("/dashboard", verifyToken, (req, res) => {
     })
 });
 
-router.post("/dashboard/add", parser.single('img'), (req, res) => {
-    // console.log(req.body);
-    console.log(req.file);
-    let mydate = new Date();
-    
-    let obj = new Post({
-        title: req.body.title,
-        type: req.body.type,
-        // img: {
-            // //data: fs.readFileSync('../src/assets/uploads/' + req.file.originalname),
-            // data: fs.readFileSync(path.resolve(__dirname, 'assets/uploads/') + req.file.originalname),
-            // contentType: 'image/png'
-        // },
-        //name: req.file.originalname,
-        //path: req.file.path,
-        date: mydate,
-        url: req.file.url
-    });
+router.post("/dashboard/add", (req, res) => {
+    let imageData = req.body.img;
+    cloudinary.uploader.upload(imageData,{folder: "portfolio-asset"}).then((result) => {
+        let mydate = new Date();
+        let obj = new Post({
+                title: req.body.title,
+                type: req.body.type,
+                date: mydate,
+                url: req.body.url,
+                imageUrl: result.url,
+                imageId: result.public_id
+            });
     obj.save((err, item) => {
         if(err){
             return res.send(err);
         }
         res.send(item);
-        console.log(item)
     });
+  }).catch((error) => {
+      res.status(401).send(error);
+  });
+    
 });
 
 router.get("/dashboard/dashview", (req, res) => {
@@ -186,33 +181,33 @@ router.get('/dashboard/dashview/:id', (req, res) => {
     });
 });
 
-router.put('/dashboard/dashview/:id', /*upload,*/ (req, res) => {
+router.put('/dashboard/dashview/:id', (req, res) => {
     let mydate = new Date();
      if(!objectID.isValid(req.params.id)){
         return res.status(400).send(err + `no post with given id ${req.params.id}`);
     }
-   let postUpdate = {
-         title: req.body.title,
-         type: req.body.type,
-         // img: {
-            // data: fs.readFileSync(path.resolve(__dirname, 'assets/uploads/') + req.file.originalname),
-            // contentType: 'image/png'
-         // },
-          // name: req.file.originalname,
-          // path: req.file.path,
-          date: mydate,
-          //url: req.body.url
-           url: req.file.url
-   };
-   Post.findByIdAndUpdate(req.params.id, {$set: postUpdate}, {new: true}, (err, doc) => {
-       if(err){
-           return res.send(`error updating post wuth id ${req.params.id}`);
-           }
-           res.send(doc);
-   });
+       let imageData = req.body.img;
+       cloudinary.uploader.upload(imageData,{folder: "portfolio-asset"}).then((result) => {
+       let postUpdate = {
+             title: req.body.title,
+             type: req.body.type,
+             date: mydate,
+             url: req.body.url,
+             imageUrl: result.url,
+             imageId: result.public_id
+       };
+       Post.findByIdAndUpdate(req.params.id, {$set: postUpdate}, {new: true}, (err, doc) => {
+           if(err){
+               return res.send(`error updating post wuth id ${req.params.id}`);
+               }
+               res.send(doc);
+       });
+     }).catch((error) => {
+      res.status(401).send(error);
+  });
 });
 
-router.delete('/dashboard/dashview/:id',/*upload,*/ (req, res) => {
+router.delete('/dashboard/dashview/:id', (req, res) => {
     if(!objectID.isValid(req.params.id)){
         return res.status(400).send(err + `no post with given id ${req.params.id}`);
     }
@@ -222,9 +217,8 @@ router.delete('/dashboard/dashview/:id',/*upload,*/ (req, res) => {
          if(err){
            return res.send(`error deleting post wuth id ${req.params.id}`);
            }
-           let path = doc.path;
-           fs.unlink(path, (err) => {
-               console.log(err);
+           cloudinary.uploader.destroy(doc.imageId, (error, result) => {
+              console.log(result, error);
            });
            res.send(doc);
     });

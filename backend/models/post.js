@@ -5,11 +5,10 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
     title: {type: String},
     type: {type: String},
-    //img: {data: Buffer, contentType: String},
-    //name: {type: String},
-    //path: {type: String},
     date: {type: String},
-    url: {type: String}
+    url: {type: String},
+    imageUrl: {type: String},
+    imageId: {type: String}
 });
 
 module.exports = mongoose.model('posts', postSchema, 'Post');

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Girassol&family=Roboto+Condensed:wght@300&display=swap');
+
 .container-fluid{
     overflow-x: hidden;
 }
@@ -7,7 +9,7 @@
 }
 h2{
     color: #5cb85c;
-    font-family: cursive;
+    font-family: 'Girassol', cursive;
     font-weight: bold;
 }
 .floating-btn{

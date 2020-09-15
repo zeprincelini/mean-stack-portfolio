@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Girassol&family=Roboto+Condensed:wght@300&display=swap');
+
 .row{
     overflow-x: hidden;
 }
@@ -11,7 +13,7 @@
 }
 h2{
     margin-bottom: 50px;
-    font-family: cursive;
+    font-family: 'Girassol', cursive;
     color: white;
 }
 .linker{
@@ -37,7 +39,7 @@ input{
 .form-control{
     height: 40px;
     font-size: 18px;
-    font-family: cursive;
+    font-family: 'Girassol', cursive;
 }
 
 input.ng-invalid.ng-touched{

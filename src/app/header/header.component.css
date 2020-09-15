@@ -41,8 +41,9 @@
     font-family: cursive;
 }
 
-.ham img{
+.ham{
   display: none;
+  color: #5CB85C;
 }
 .mob-brand{
     display: none;
@@ -54,7 +55,7 @@
 		display: none;
     }
 
-    .ham img, .mob-brand{
+    .ham, .mob-brand{
         margin-top: 10px;
         display: block;
         position: absolute;
@@ -65,10 +66,10 @@
       height: auto;
       float: left;
   }
-  .ham img{
-    left: 92%;
+  .ham{
+    left: 90%;
   }
-  .ham img:hover{
+  .ham:hover{
       cursor: pointer;
   }
   .side-bar-mob{

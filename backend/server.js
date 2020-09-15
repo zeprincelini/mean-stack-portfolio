@@ -28,3 +28,8 @@ app.get('/*', (req, res) => {
 app.listen(PORT, () => {
     console.log('running on port: ', PORT);
 });
+
+process.on('uncaughtException', (err) => {
+    console.log(err.stack);
+    process.exit(1)
+});

@@ -7,9 +7,10 @@
               </div>
           </div>
       </div>
-      <div class="floating-btn" [ngStyle] = "{display: display}">
-        <img src="assets/vectors/float.jpg" alt="" 
-        width='130px' height= 'auto' class="img-responsive" role="button" (click)='appear()'>
+      <div class="floating-btn" [ngStyle] = "{display: display}" role="button" (click)='appear()'>
+        <mat-icon>view_module</mat-icon>
+        <!-- <img src="assets/vectors/float.jpg" alt="" 
+        width='130px' height= 'auto' class="img-responsive" role="button" (click)='appear()'> -->
     </div>
     <!--To be set to display none-->
     <div class="row section" [ngClass] = "{section: show}" *ngIf = "dash; else nodash">

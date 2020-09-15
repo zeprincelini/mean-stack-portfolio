@@ -12,9 +12,13 @@ h2{
 }
 .floating-btn{
     display: block;
+    color: #5CB85C;
 }
-.floating-btn img:hover{
+.floating-btn:hover{
     cursor: pointer;
+}
+.floating-btn mat-icon{
+    font-size: 50px;
 }
 
 figure{

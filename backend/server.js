@@ -29,7 +29,8 @@ app.listen(PORT, () => {
     console.log('running on port: ', PORT);
 });
 
-process.on('uncaughtException', (err) => {
-    console.log(err.stack);
-    process.exit(1)
+app.use(function(err, req, res, next){
+  console.log(err.stack);
+  res.status(401).send("new error= " + err);
+  // additional logic, like emailing OPS staff w/ stack trace
 });

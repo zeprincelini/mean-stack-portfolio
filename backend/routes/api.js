@@ -254,8 +254,5 @@ router.post('/contact/send', (req, res) => {
     });
 });
 
-process.on('uncaughtException', (err) => {
-    console.log(err.stack);
-    process.exit(1)
-});
+
 module.exports = router;

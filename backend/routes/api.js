@@ -133,8 +133,9 @@ router.get("/dashboard", verifyToken, (req, res) => {
     })
 });
 
-router.post("/dashboard/add", (req, res) => {
-    let imageData = req.body.img;
+router.post("/dashboard/add", async (req, res) => {
+   try{
+        let imageData = req.body.img;
     cloudinary.uploader.upload(imageData,{folder: "portfolio-asset"}).then((result) => {
         let mydate = new Date();
         let obj = new Post({
@@ -145,7 +146,7 @@ router.post("/dashboard/add", (req, res) => {
                 imageUrl: result.url,
                 imageId: result.public_id
             });
-    obj.save((err, item) => {
+    await obj.save((err, item) => {
         if(err){
             return res.send(err);
         }
@@ -154,6 +155,9 @@ router.post("/dashboard/add", (req, res) => {
   }).catch((error) => {
       res.status(401).send(error);
   });
+   } catch(error){
+       res.status(501).send(error);
+   }
     
 });
 

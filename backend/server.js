@@ -16,6 +16,11 @@ app.use(cors());
     // next();
 // });
 
+app.use((req, res, next) => {
+    res.setHeader('Connection', 'open');
+    next();
+});
+
 app.use(bodyParser.json());
 //app.use(express.static('uploads'));
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -25,9 +30,21 @@ app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/myportfolio', 'index.html'));
 });
 
-const appServer = app.listen(PORT, () => {
-    console.log('running on port: ', PORT);
+app.use((req, res, next) => {
+    const error = new Error('not uploaded');
+    error.status(404);
+    next(error);
 });
 
-appServer.keepAliveTimeout = 80000;
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.json({
+        error: {
+            message: error.message
+        }
+    });
+});
 
+app.listen(PORT, () => {
+    console.log('running on port: ', PORT);
+});

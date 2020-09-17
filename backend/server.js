@@ -25,7 +25,9 @@ app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/myportfolio', 'index.html'));
 });
 
-app.listen(PORT, () => {
+const appServer = app.listen(PORT, () => {
     console.log('running on port: ', PORT);
 });
+
+appServer.keepAliveTimeout = 80000;
 

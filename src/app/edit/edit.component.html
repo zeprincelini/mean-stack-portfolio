@@ -17,7 +17,7 @@
           <input type="text" class="form-control" formControlName="url" value="{{data.url}}">
         </div>
         <div class="form-group">
-          <input type="file" class="form-control" formControlName ="img" (change) ="uploadFile($event)">
+          <input type="file" class="form-control" name ="img" (change) ="uploadFile($event)">
           <img src ="{{data.imageUrl}}" class="img-responsive" width="200" height="auto" *ngIf ="data.name">
         </div>
         <div class="form-group">

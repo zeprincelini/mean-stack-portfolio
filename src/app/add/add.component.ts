@@ -44,7 +44,8 @@ postBody(){
 
   this.dashService.postDash(formData)
   .subscribe(
-    res => this.postSuccess = true
+    res => {this.postSuccess = true;
+    console.log(res)}
   ,
     err => console.log(err)
   )

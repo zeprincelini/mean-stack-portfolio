@@ -134,7 +134,7 @@ router.get("/dashboard", verifyToken, (req, res) => {
 });
 
 router.post("/dashboard/add", async (req, res) => {
-              await let imageData = req.body.img;
+              let imageData = req.body.img;
               res.send(imageData);
               await cloudinary.uploader.upload(imageData,{folder: "portfolio-asset"}).then((result) => {
                 let mydate = new Date();

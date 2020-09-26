@@ -7,9 +7,9 @@ import { Subject } from 'rxjs';
 })
 export class DashboardService {
   //dev
-  /* private dashboardUrl = "http://localhost:3000/api/dashboard";
-  private dashPostUrl = "http://localhost:3000/api/dashboard/add";
-  private getPostUrl = "http://localhost:3000/api/dashboard/dashview"; */
+  // private dashboardUrl = "http://localhost:3000/api/dashboard";
+  // private dashPostUrl = "http://localhost:3000/api/dashboard/add";
+  // private getPostUrl = "http://localhost:3000/api/dashboard/dashview";
 
   //prod
   private dashboardUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard";

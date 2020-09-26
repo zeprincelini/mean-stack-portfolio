@@ -31,6 +31,7 @@ import { SafePipe } from './safe.pipe';
 import { EditComponent } from './edit/edit.component';
 import { Base64 } from './base64.pipe';
 import { ShortenPipe } from './shorten.pipe';
+import { FileAccessorDirectiveDirective } from './file-accessor-directive.directive';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, data: {showRootComponents: true}},
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     SafePipe,
     Base64,
    ShortenPipe,
-    EditComponent
+    EditComponent,
+    FileAccessorDirectiveDirective
   ],
   imports: [
     BrowserModule,

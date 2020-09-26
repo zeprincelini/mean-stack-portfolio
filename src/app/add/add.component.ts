@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, FormsModule } from '@angular/forms';
 })
 export class AddComponent implements OnInit {
 postSuccess = false;
+postFail = false;
 uploadForm: FormGroup;
 data = {};
 values = ["Web Development", "Graphic Design", "Ui/Ux Design", "Android Design"];
@@ -42,12 +43,17 @@ postBody(){
   formData.append("img", this.uploadForm.get('img').value);
   formData.append("type", this.uploadForm.get('type').value);
 
+
   this.dashService.postDash(formData)
   .subscribe(
     res => {this.postSuccess = true;
-    console.log(res)}
+    console.log(res);
+  }
   ,
-    err => console.log(err)
+    err => {
+      this.postFail = true;
+      console.log(err);
+    }
   )
 }
 }

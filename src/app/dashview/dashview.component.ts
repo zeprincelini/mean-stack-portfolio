@@ -14,6 +14,7 @@ export class DashviewComponent implements OnInit {
   postData = [{}]
   id : any;
   myUrl: any;
+  deleteStatus = false;
   constructor(private dashService: DashboardService, private route: Router, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class DashviewComponent implements OnInit {
     if(confirm("Are you sure you want to delete?") == true){
       this.dashService.deletePost(id)
       .subscribe(
-        res => alert("deleted successfully"),
+        res => this.deleteStatus = true,
         err => console.log(err)
       )
     }

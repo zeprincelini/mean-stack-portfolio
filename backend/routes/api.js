@@ -40,17 +40,17 @@ function verifyToken(req, res, next){
   
 }
 
-// let storage = multer.diskStorage({
-    // destination: (req, file, cb) => {
-        // //cb(null, '../src/assets/uploads/')
-         // cb(null, path.join(__dirname, '/assets/uploads'))
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        //cb(null, '../src/assets/uploads/')
+         cb(null, path.join(__dirname, '/assets/uploads'))
         
-    // },
-    // filename: (req, file, cb) => {
-        // cb(null, file.originalname)
-    // }
-// });
-// let upload = multer({ storage: storage }).single('img');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+});
+let upload = multer({ storage: storage }).single('img');
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -66,7 +66,6 @@ cloudinary.config({
   // },
 // });
     // const parser = multer({ storage: storage });
-
 
 router.get('/', (req, res) => {
     res.send('Hello from Api route');
@@ -133,8 +132,11 @@ router.get("/dashboard", verifyToken, (req, res) => {
     })
 });
 
-router.post("/dashboard/add", (req, res) => {
-              let imageData = req.body.img;
+router.post("/dashboard/add", upload, (req, res) => {
+              let imageData = req.file.path;
+              // console.log("image data = " + imageData);
+              // console.log("req file = "+ req.files);
+               // console.log("req body = "+ JSON.stringify(req.body));
               cloudinary.uploader.upload(imageData,{folder: "portfolio-asset"}).then((result) => {
                 let mydate = new Date();
                 let obj = new Post({
@@ -148,12 +150,15 @@ router.post("/dashboard/add", (req, res) => {
                 obj.save((err, item) => {
                 if(err){
                    return res.send(err);
+                   console.log("err = " +err);
                 }
                 res.send(item);
             });
         }).catch((error) => {
             res.status(500).send(error);
+             console.log("error = " +JSON.stringify(error));
         });
+        //console.log(req.file);
     
 });
 
@@ -181,12 +186,12 @@ router.get('/dashboard/dashview/:id', (req, res) => {
     });
 });
 
-router.put('/dashboard/dashview/:id', (req, res) => {
+router.put('/dashboard/dashview/:id', upload, (req, res) => {
     let mydate = new Date();
      if(!objectID.isValid(req.params.id)){
         return res.status(400).send(err + `no post with given id ${req.params.id}`);
     }
-       let imageData = req.body.img;
+       let imageData = req.file.path;
        cloudinary.uploader.upload(imageData,{folder: "portfolio-asset"}).then((result) => {
        let postUpdate = {
              title: req.body.title,
@@ -208,15 +213,16 @@ router.put('/dashboard/dashview/:id', (req, res) => {
 });
 
 router.delete('/dashboard/dashview/:id', (req, res) => {
+    // let path = req.file.path;
+    // fs.unlink(path + req.file.filename);
     if(!objectID.isValid(req.params.id)){
         return res.status(400).send(err + `no post with given id ${req.params.id}`);
     }
     Post.findByIdAndRemove(req.params.id, (err, doc) => {
-        // let path = req.file.path;
-        // fs.unlink(path + req.file.filename);
          if(err){
            return res.send(`error deleting post wuth id ${req.params.id}`);
            }
+           
            cloudinary.uploader.destroy(doc.imageId, (error, result) => {
               console.log(result, error);
            });

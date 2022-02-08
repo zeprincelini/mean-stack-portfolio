@@ -1,0 +1,39 @@
+<div class="container-fluid work-section">
+  <div class="row">
+    <div class="col-sm-12 work-main-header">
+      <h1>Portfolio</h1>
+    </div>
+    <div class="loader" *ngIf="loading; else content">
+      <mat-progress-bar class="bar" mode="indeterminate"></mat-progress-bar>
+    </div>
+    <ng-template #content>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-primary">
+            <div class="row text-center auto-clear">
+              <div class="col-sm-3" *ngFor="let posts of data">
+                <a href="{{ posts.url }}">
+                  <figure>
+                    <img
+                      src="{{ posts.imageUrl }}"
+                      alt="not found"
+                      *ngIf="posts.title"
+                      width="200px"
+                      height="auto"
+                      class="img-fluid"
+                    />
+                    <figcaption>
+                      {{ posts.title }}
+                      <p>{{ posts.type }}</p>
+                    </figcaption>
+                  </figure>
+                </a>
+              </div>
+              <!-- <div class ="clear"> </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

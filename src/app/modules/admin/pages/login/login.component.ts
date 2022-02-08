@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/shared/services/auth-service/auth.service";
 
 @Component({
@@ -13,18 +13,14 @@ export class LoginComponent implements OnInit {
     username: "",
     password: "",
   };
-  constructor(
-    private route: ActivatedRoute,
-    private auth: AuthService,
-    private router: Router
-  ) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   login() {
     this.auth.loginUser(this.loginUserData).subscribe(
       (res) => {
-        this.router.navigate(["/dashboard"]);
+        this.router.navigate(["/admin/dashboard"]);
         localStorage.setItem("token", res.token);
       },
       (err) => {

@@ -8,12 +8,19 @@ import { DashboardService } from "src/app/shared/services/dashboard-service/dash
 })
 export class PortfolioComponent implements OnInit {
   data = [{}];
+  loading = true;
   constructor(private dashService: DashboardService) {}
 
   ngOnInit() {
     this.dashService.getPosts().subscribe(
-      (res) => (this.data = res),
-      (err) => console.log(err)
+      (res) => {
+        this.loading = false;
+        this.data = res;
+      },
+      (err) => {
+        this.loading = false;
+        console.log(err);
+      }
     );
   }
 }

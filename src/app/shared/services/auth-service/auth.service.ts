@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
   //dev
@@ -12,27 +12,28 @@ export class AuthService {
 
   //prod
   private loginUrl = "https://shielded-ocean-66356.herokuapp.com/api/login";
-  private registerUrl = "https://shielded-ocean-66356.herokuapp.com/api/register";
+  private registerUrl =
+    "https://shielded-ocean-66356.herokuapp.com/api/register";
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  registerUser(user){
+  registerUser(user) {
     return this.http.post<any>(this.registerUrl, user);
   }
-  loginUser(user){
+  loginUser(user) {
     return this.http.post<any>(this.loginUrl, user);
   }
 
-  loggedIn(){
-    return !!localStorage.getItem('token');
+  loggedIn() {
+    return !!localStorage.getItem("token");
   }
 
-  logOut(){
-    localStorage.removeItem('token');
-    this.router.navigate(["/login"]);
+  logOut() {
+    localStorage.removeItem("token");
+    this.router.navigate(["/admin/login"]);
   }
 
-  getToken(){
-    return localStorage.getItem('token');
+  getToken() {
+    return localStorage.getItem("token");
   }
 }

@@ -17,9 +17,12 @@ export class DashviewComponent implements OnInit {
     this.getAllPosts();
   }
   getAllPosts() {
-    this.dashService.getPosts().subscribe((res) => {
-      this.postData = res;
-    });
+    this.dashService.getPosts().subscribe(
+      (res) => {
+        this.postData = res;
+      },
+      (err) => console.log(err)
+    );
   }
 
   onDelete(id) {

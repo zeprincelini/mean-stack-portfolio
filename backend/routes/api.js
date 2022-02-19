@@ -4,6 +4,7 @@ const objectID = require("mongoose").Types.ObjectId;
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const cloudinary = require("cloudinary").v2;
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 const Post = require("../models/post");
@@ -11,20 +12,25 @@ const upload = require("../helper/multer-cloudinary");
 const verifyToken = require("../helper/verifyToken");
 
 router.post("/register", (req, res) => {
-  bcrypt.hash(req.body.password, 10).then((hash) => {
-    let user = new User({
-      username: req.body.username,
-      password: hash,
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hash) => {
+      let user = new User({
+        username: req.body.username,
+        password: hash,
+      });
+      user.save((error, registeredUser) => {
+        if (error) {
+          return res.status(401).json({ error: "failed to signup" });
+        }
+        let payload = { subject: registeredUser._id };
+        let token = jwt.sign(payload, process.env.JWT_SECRET);
+        res.status(200).json({ token });
+      });
+    })
+    .catch((e) => {
+      return res.status(401).json({ error: e.message });
     });
-    user.save((error, registeredUser) => {
-      if (error) {
-        return res.status(401).json({ error: "failed to signup" });
-      }
-      let payload = { subject: registeredUser._id };
-      let token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.status(200).send(token);
-    });
-  });
 });
 router.post("/login", (req, res) => {
   let loginData = req.body;
@@ -58,12 +64,30 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/dashboard", verifyToken, (req, res) => {
+  let filter = {};
+  if (req.query.type) {
+    if (req.query.type !== "" && req.query.type.length > 0) {
+      filter.type = req.query.type;
+    }
+  }
+  Post.find(filter, (err, doc) => {
+    if (err) {
+      return res.status(401).json({ error: "failed to retrieve posts" });
+    }
+    res.status(200).json(doc);
+  });
+});
+
+router.get("/dashview", verifyToken, (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   Post.find((err, doc) => {
     if (err) {
       return res.status(401).json({ error: "failed to retrieve posts" });
     }
-    res.send(doc);
-  });
+    res.status(200).json(doc);
+  })
+    .limit(limit * 1)
+    .skip((page - 1) * limit);
 });
 
 router.post("/dashboard/add", upload, async (req, res) => {
@@ -87,16 +111,6 @@ router.post("/dashboard/add", upload, async (req, res) => {
   }
 });
 
-router.get("/dashboard/dashview", (req, res) => {
-  Post.find((err, doc) => {
-    if (err) {
-      return res.send(err + "Error retrieving posts");
-    }
-    res.send(doc);
-    console.log(doc);
-  });
-});
-
 router.get("/dashboard/dashview/:id", (req, res) => {
   if (!objectID.isValid(req.params.id)) {
     return res.status(400).send(err + "no post with given id");
@@ -105,7 +119,7 @@ router.get("/dashboard/dashview/:id", (req, res) => {
     if (err) {
       return res.send(err + "Error retrieving post");
     }
-    res.send(doc);
+    res.status(200).json(doc);
   });
 });
 
@@ -144,13 +158,13 @@ router.delete("/dashboard/dashview/:id", (req, res) => {
   }
   Post.findByIdAndRemove(req.params.id, (err, doc) => {
     if (err) {
-      return res.send(`error deleting post wuth id ${req.params.id}`);
+      return res.send(`error deleting post with id ${req.params.id}`);
     }
 
     cloudinary.uploader.destroy(doc.imageId, (error, result) => {
       console.log(result, error);
     });
-    res.send(doc);
+    res.status(200).json(doc);
   });
 });
 
@@ -175,11 +189,9 @@ router.post("/contact/send", (req, res) => {
 
   transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
-      console.log("Error, try again", err);
-      res.status(500).send("Error, try again " + err);
+      res.status(500).send("Error, try again " + err.message);
     } else {
       res.status(200).send("Email sent successfully");
-      console.log(data);
     }
   });
 });

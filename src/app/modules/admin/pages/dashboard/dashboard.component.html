@@ -1,79 +1,95 @@
 <div class="container-fluid">
   <div class="row">
-      <div class="col-sm-12">
-          <div class="row">
-              <div class="col-sm-12 text-center head">
-                  <h2>Welcome DonLini</h2>
-              </div>
-          </div>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12 text-center head">
+          <h2>Welcome DonLini</h2>
+        </div>
       </div>
-      <div class="floating-btn" [ngStyle] = "{display: display}" role="button" (click)='appear()'>
-        <mat-icon>view_module</mat-icon>
-        <!-- <img src="assets/vectors/float.jpg" alt="" 
+    </div>
+    <div
+      class="floating-btn"
+      [ngStyle]="{ display: display }"
+      role="button"
+      (click)="appear()"
+    >
+      <mat-icon>view_module</mat-icon>
+      <!-- <img src="assets/vectors/float.jpg" alt="" 
         width='130px' height= 'auto' class="img-responsive" role="button" (click)='appear()'> -->
     </div>
     <!--To be set to display none-->
-    <div class="row section" [ngClass] = "{section: show}" *ngIf = "dash; else nodash">
-        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-            <div class="row text-center">
-                <div class="col-sm-6 col-xs-6">
-                    <div class="dashboard" (click) = "toDash()">
-                        <figure>
-                            <!-- <img src="../../assets/vectors/dash.png" width="80x" height="auto"> -->
-                            <mat-icon>dashboard</mat-icon>
-                            <!-- <h1>
+    <div
+      class="row section"
+      [ngClass]="{ section: show }"
+      *ngIf="dash; else nodash"
+    >
+      <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+        <div class="row text-center">
+          <div class="col-sm-6 col-xs-6">
+            <div class="dashboard" (click)="toDash()">
+              <figure>
+                <!-- <img src="../../assets/vectors/dash.png" width="80x" height="auto"> -->
+                <mat-icon>dashboard</mat-icon>
+                <!-- <h1>
                                 Dashboard
                             </h1> -->
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-6">
-                    <div class="add" (click) = "toAdd()">
-                        <figure>
-                            <!-- <img src="../../assets/vectors/add.png" width="80x" height="auto"> -->
-                            <mat-icon>add</mat-icon>
-                            <!-- <h1>
+              </figure>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="add" (click)="toAdd()">
+              <figure>
+                <!-- <img src="../../assets/vectors/add.png" width="80x" height="auto"> -->
+                <mat-icon>add</mat-icon>
+                <!-- <h1>
                                 Add New
                             </h1> -->
-                        </figure>
-                    </div>
-                </div> 
+              </figure>
             </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" (click) = "logOut()">
-                <div class="logout text-center">
-                    <figure>
-                        <!-- <img src="../../assets/vectors/cls.png" width="80x" height="auto"> -->
-                        <mat-icon>exit_to_app</mat-icon>
-                            <!-- <h1>
+      </div>
+      <div class="row">
+        <div
+          class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2"
+          (click)="logOut()"
+        >
+          <div class="logout text-center">
+            <figure>
+              <!-- <img src="../../assets/vectors/cls.png" width="80x" height="auto"> -->
+              <mat-icon>exit_to_app</mat-icon>
+              <!-- <h1>
                                Log out
                             </h1> -->
-                    </figure>
-                </div>
-            </div>
+            </figure>
+          </div>
         </div>
+      </div>
     </div>
     <ng-template #nodash>
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <nav mat-tab-nav-bar>
-                    <a mat-tab-link *ngFor="let link of navLinks"
-                    [routerLink]="link.link"
-                    routerLinkActive #rla="routerLinkActive"
-                    [active]="rla.isActive">
-                        {{link.label}}
-                    </a>
-                </nav>
-                <router-outlet></router-outlet>
-            </div>
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 tab-nav">
+          <nav mat-tab-nav-bar>
+            <a
+              mat-tab-link
+              *ngFor="let link of navLinks"
+              [routerLink]="link.link"
+              routerLinkActive
+              #rla="routerLinkActive"
+              [active]="rla.isActive"
+            >
+              {{ link.label }}
+            </a>
+          </nav>
+          <router-outlet></router-outlet>
         </div>
-      </ng-template>
+      </div>
+    </ng-template>
   </div>
 </div>
-<div class="logout2" *ngIf = "log">
-    <mat-icon (click) = "logOut()">exit_to_app</mat-icon>
+<div class="logout2" *ngIf="log">
+  <mat-icon (click)="logOut()">exit_to_app</mat-icon>
 </div>
-<footer *ngIf = "dash">
-    <p>2018 © DonLini.com All Rights Reserved.</p>
+<footer *ngIf="dash">
+  <p>2018 © DonLini.com All Rights Reserved.</p>
 </footer>

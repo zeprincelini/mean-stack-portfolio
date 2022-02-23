@@ -52,7 +52,7 @@ router.post("/login", (req, res) => {
           }
           let payload = { subject: user._id };
           let token = jwt.sign(payload, process.env.JWT_SECRET);
-          res.status(200).send({ token });
+          res.status(200).json({ token });
         })
         .catch((err) => {
           res.status(500).json({
@@ -63,7 +63,7 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/dashboard", verifyToken, (req, res) => {
+router.get("/dashboard", (req, res) => {
   let filter = {};
   if (req.query.type) {
     if (req.query.type !== "" && req.query.type.length > 0) {
@@ -78,16 +78,17 @@ router.get("/dashboard", verifyToken, (req, res) => {
   });
 });
 
-router.get("/dashview", verifyToken, (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
-  Post.find((err, doc) => {
-    if (err) {
-      return res.status(401).json({ error: "failed to retrieve posts" });
-    }
-    res.status(200).json(doc);
-  })
-    .limit(limit * 1)
-    .skip((page - 1) * limit);
+router.get("/dashview", verifyToken, async (req, res) => {
+  const { page = 0, limit = 10 } = req.query;
+  try {
+    const posts = await Post.find()
+      .limit(limit * 1)
+      .skip(page * limit); // (page - 1) * limit but matpaginator starts at 0
+    const totalCount = await Post.count();
+    return res.status(200).json({ posts, totalCount });
+  } catch (err) {
+    return res.status(401).json({ error: "failed to retrieve posts" });
+  }
 });
 
 router.post("/dashboard/add", upload, async (req, res) => {

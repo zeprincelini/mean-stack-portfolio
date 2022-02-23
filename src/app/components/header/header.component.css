@@ -1,91 +1,86 @@
-.aside{
-    background: black;
-    height: 100vh;
+.aside {
+  background: black;
+  height: 100vh;
 }
 
-.brand{
-   padding-top: 10px;
+.brand {
+  padding-top: 10px;
 }
 
-.brand:hover{
-    border-bottom: 1px solid #5CB85C;
+.space {
+  min-height: 100px;
 }
 
-
-.space{
-    min-height: 100px;
+.side-bar a {
+  color: #5cb85c;
+  padding-top: 30px;
+  text-align: center;
 }
 
-.side-bar a{
-    color: #5CB85C;
-    padding-top: 30px;
-    text-align: center;
-}
-
-.side-bar-mob{
-    display: none;
-}
-
-.nav-pills>li.active>a{
-    background: none;
-    color: #5CB85C;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: cursive;
-}
-
-.nav-pills>li a:hover{
-    background: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: cursive;
-}
-
-.ham{
+.side-bar-mob {
   display: none;
-  color: #5CB85C;
 }
-.mob-brand{
+
+.nav-pills > li.active > a {
+  background: none;
+  color: #5cb85c;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: cursive;
+}
+
+.nav-pills > li a:hover {
+  background: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: cursive;
+}
+
+.ham {
+  display: none;
+  color: #5cb85c;
+}
+.mob-brand {
+  display: none;
+}
+
+/*media query*/
+@media only screen and (max-width: 768px) {
+  .aside {
     display: none;
-}
-
-/*media query*/ 
-@media only screen and (max-width: 768px){
-	.aside{
-		display: none;
-    }
-
-    .ham, .mob-brand{
-        margin-top: 10px;
-        display: block;
-        position: absolute;
-        z-index: 999;
-    }
-  .mob-brand{
-      width: 80px;
-      height: auto;
-      float: left;
   }
-  .ham{
+
+  .ham,
+  .mob-brand {
+    margin-top: 10px;
+    display: block;
+    position: absolute;
+    z-index: 999;
+  }
+  .mob-brand {
+    width: 80px;
+    height: auto;
+    float: left;
+  }
+  .ham {
     left: 90%;
   }
-  .ham:hover{
-      cursor: pointer;
+  .ham:hover {
+    cursor: pointer;
   }
-  .side-bar-mob{
-      display: block;
-      position: absolute;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.6);
-      width: 100%;
-      margin-top: 50px;
+  .side-bar-mob {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    margin-top: 50px;
   }
-  .side-bar-mob a{
-    color: #5CB85C;
+  .side-bar-mob a {
+    color: #5cb85c;
   }
 
-  .side-bar-mob:hover{
+  .side-bar-mob:hover {
     background: rgba(0, 0, 0, 1);
   }
-  
 }

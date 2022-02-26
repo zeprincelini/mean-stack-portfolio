@@ -12,52 +12,10 @@ export class PortfolioComponent implements OnInit {
   error = false;
   type = "Web Development";
 
-  datum = [
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-    { title: "new", type: "devops", url: "www", imageUrl: "saome" },
-  ];
   constructor(private dashService: DashboardService) {}
 
   ngOnInit() {
-    // this.getAllPosts(this.type);
+    this.getAllPosts(this.type);
     // this.dashService.getPosts().subscribe(
     //   (res) => (this.data = res),
     //   (err) => console.log(err)

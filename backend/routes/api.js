@@ -74,7 +74,7 @@ router.get("/dashboard", (req, res) => {
     if (err) {
       return res.status(401).json({ error: "failed to retrieve posts" });
     }
-    res.status(200).json(doc);
+    return res.status(200).json(doc);
   });
 });
 
@@ -83,7 +83,7 @@ router.get("/dashview", verifyToken, async (req, res) => {
   try {
     const posts = await Post.find()
       .limit(limit * 1)
-      .skip(page * limit); // (page - 1) * limit but matpaginator starts at 0
+      .skip(page * limit); // (page - 1) * limit but matpaginator starts at index 0
     const totalCount = await Post.count();
     return res.status(200).json({ posts, totalCount });
   } catch (err) {

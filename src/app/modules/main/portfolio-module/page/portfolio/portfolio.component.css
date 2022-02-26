@@ -29,12 +29,22 @@
 
 .panel.panel-primary {
   height: 65vh;
-  /* background: transparent; */
   background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
   border: none;
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.col-sm-3 {
+  display: flex;
+  justify-content: center;
+}
+
+figure {
+  width: 250px;
+}
+
 figure:hover {
   cursor: pointer;
 }
@@ -47,13 +57,11 @@ figure p {
   color: #5cb85c;
 }
 
-/* figure{
-    box-shadow: inset 0 0 30px #000;
-} */
-/* .loop>.clear:nth-child(3n+1)::before{
-    content: "";
-    clear: both;
-} */
+.image {
+  width: 100%;
+  height: 250px;
+  background: #6f8b6f;
+}
 
 .loader {
   display: flex;

@@ -15,6 +15,7 @@ import { SharedModule } from "./shared/shared.module";
 import { MainLayoutComponent } from "./main-layout/main-layout.component";
 import { MaterialModule } from "./material/material";
 import { FileAccessorDirectiveDirective } from "./file-accessor-directive.directive";
+import { NotFoundComponent } from "./components/not-found/not-found.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FileAccessorDirectiveDirective } from "./file-accessor-directive.direct
     MainLayoutComponent,
     FooterComponent,
     FileAccessorDirectiveDirective,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

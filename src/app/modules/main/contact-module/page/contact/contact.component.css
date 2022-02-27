@@ -40,3 +40,7 @@ button {
   border-color: #5cb85c;
   width: 100%;
 }
+
+button:focus {
+  outline: none;
+}

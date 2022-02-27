@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { MainLayoutComponent } from "./main-layout/main-layout.component";
-import { HomeComponent } from "./modules/main/home-module/page/home/home.component";
 
 const routes: Routes = [
   {
@@ -49,7 +49,11 @@ const routes: Routes = [
     path: "admin",
     loadChildren: () =>
       import("./modules/admin/admin.module").then((m) => m.AdminModule),
-    data: { showRootComponents: true },
+  },
+  {
+    path: "**",
+    pathMatch: "full",
+    component: NotFoundComponent,
   },
 ];
 

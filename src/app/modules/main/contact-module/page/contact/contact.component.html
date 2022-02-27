@@ -41,7 +41,10 @@
             name="job"
           ></textarea>
         </div>
-        <button class="btn btn-success">Submit</button>
+        <button class="btn btn-success" [disabled]="loading">
+          <div *ngIf="loading; else submit">loading</div>
+          <ng-template #submit>Submit</ng-template>
+        </button>
       </form>
     </div>
   </div>

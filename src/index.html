@@ -38,7 +38,7 @@
         transform: translate(-50%, -50%);
         color: #fff;
         overflow: hidden;
-        animation: fade 0.4s infinite alternate;
+        animation: fade 1s infinite alternate;
       }
 
       @keyframes fade {
@@ -52,18 +52,17 @@
     </style>
   </head>
   <body class="mat-typography">
-    <app-root>
-      <div class="pre-loader">
-        <div class="loader">
-          <img
-            src="assets/images/loader.png"
-            alt="logo"
-            width="100px"
-            height="auto"
-            style="max-width: 100%"
-          />
-        </div>
+    <div class="pre-loader">
+      <div class="loader">
+        <img
+          src="assets/images/loader.png"
+          alt="logo"
+          width="300px"
+          height="auto"
+          style="max-width: 100%"
+        />
       </div>
-    </app-root>
+    </div>
+    <app-root></app-root>
   </body>
 </html>

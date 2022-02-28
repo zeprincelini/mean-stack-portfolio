@@ -10,7 +10,6 @@ export class PortfolioComponent implements OnInit {
   data = [{}];
   loading = false;
   error = false;
-  filterState = false;
   type = "Web Development";
 
   constructor(private dashService: DashboardService) {}
@@ -25,10 +24,9 @@ export class PortfolioComponent implements OnInit {
 
   getAllPosts = (val: string) => {
     this.loading = true;
-    this.error = false;
+    // this.error = false;
     this.dashService.getPosts(val).subscribe(
       (res) => {
-        this.filterState = true;
         this.loading = false;
         this.error = false;
         this.data = res;

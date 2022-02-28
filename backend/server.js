@@ -24,6 +24,7 @@ app.use(morgan("dev"));
 app.use(
   helmet({
     contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
   })
 );
 app.use(express.static(path.join(__dirname, "../dist")));

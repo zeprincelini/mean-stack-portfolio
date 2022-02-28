@@ -16,17 +16,6 @@ export class DashviewComponent implements OnInit {
   limit: number = 5;
   limitOptions = [5, 10, 15, 20];
   tableColumns: string[] = ["date", "title", "thumbnail", "action"];
-  // data = new MatTableDataSource([
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  //   { date: "12/22", title: "powerful", thumbnail: "im here" },
-  // ]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

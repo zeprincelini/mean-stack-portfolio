@@ -42,16 +42,13 @@ export class DashboardComponent implements OnInit {
       );
     });
 
-    this.dashService.getPosts().subscribe(
-      (res) => console.log(res),
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            this.router.navigate(["/login"]);
-          }
+    this.dashService.getPosts().subscribe((err) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.router.navigate(["/login"]);
         }
       }
-    );
+    });
   }
   appear() {
     this.show = !this.show;

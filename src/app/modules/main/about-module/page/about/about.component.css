@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Girassol&family=Roboto+Condensed:wght@300&display=swap");
 
 .about-section {
-  background: url(/assets/images/ll2.png) top center no-repeat;
+  background: url(../../../../../../assets/images/ll2.png) top center no-repeat;
   background-size: cover;
   display: table;
   width: 100%;

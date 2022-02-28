@@ -28,7 +28,7 @@
     <ng-template #content>
       <div class="row">
         <div class="col-sm-12">
-          <div class="row" *ngIf="error; else data">
+          <div class="row" *ngIf="error; else grid">
             <div class="col-sm-4 col-sm-offset-4">
               <div class="alert alert-danger">
                 <div>Error retrieving posts</div>
@@ -38,8 +38,7 @@
               </div>
             </div>
           </div>
-
-          <ng-template #data>
+          <ng-template #grid>
             <div class="panel panel-primary">
               <div class="row text-center auto-clear">
                 <div class="col-sm-3" *ngFor="let posts of data">

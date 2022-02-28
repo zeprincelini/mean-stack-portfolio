@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-root",
@@ -8,9 +8,5 @@ import { Component, Renderer2 } from "@angular/core";
 export class AppComponent {
   title = "myportfolio";
   root: Boolean;
-  public constructor(private renderer: Renderer2) {}
-  ngAfterViewInit() {
-    let preLoader = this.renderer.selectRootElement("#loader-container");
-    this.renderer.setStyle(preLoader, "display", "none");
-  }
+  public constructor() {}
 }

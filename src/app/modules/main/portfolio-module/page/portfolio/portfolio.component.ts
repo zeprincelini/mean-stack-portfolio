@@ -10,16 +10,13 @@ export class PortfolioComponent implements OnInit {
   data = [{}];
   loading = false;
   error = false;
+  filter = false;
   type = "Web Development";
 
   constructor(private dashService: DashboardService) {}
 
   ngOnInit() {
     this.getAllPosts(this.type);
-    // this.dashService.getPosts().subscribe(
-    //   (res) => (this.data = res),
-    //   (err) => console.log(err)
-    // );
   }
 
   getAllPosts = (val: string) => {
@@ -29,6 +26,7 @@ export class PortfolioComponent implements OnInit {
       (res) => {
         this.loading = false;
         this.error = false;
+        this.filter = true;
         this.data = res;
       },
       (err) => {

@@ -9,8 +9,8 @@ export class AppComponent {
   title = "myportfolio";
   root: Boolean;
   public constructor(private renderer: Renderer2) {}
-  // ngAfterViewInit() {
-  //   let preLoader = this.renderer.selectRootElement("#loader-container");
-  //   this.renderer.setStyle(preLoader, "display", "none");
-  // }
+  ngAfterViewInit() {
+    let preLoader = this.renderer.selectRootElement("#loader-container");
+    this.renderer.setStyle(preLoader, "display", "none");
+  }
 }

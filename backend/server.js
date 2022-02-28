@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(morgan("dev"));
-// app.use(helmet());
+app.use(helmet());
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use("/api", api);
 

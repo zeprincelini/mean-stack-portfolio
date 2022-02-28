@@ -21,7 +21,17 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(helmet());
+// app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "script-src": ["'unsafe-eval'"],
+      },
+    },
+  })
+);
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use("/api", api);
 

@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col-sm-12">
               <!-- filter -->
-              <div class="filter pull-right" *ngIf="!error">
+              <div class="filter pull-right" *ngIf="filterState">
                 <button
                   mat-button
                   [matMenuTriggerFor]="menu"
@@ -54,8 +54,8 @@
                       src="{{ posts.imageUrl }}"
                       alt="portfolio images"
                       *ngIf="posts.title"
-                      width="300px"
-                      height="250px"
+                      width="250px"
+                      height="200px"
                       class="img-fluid"
                     />
                     <figcaption>

@@ -15,7 +15,7 @@ export class DashboardService {
   private dashPostUrl =
     "https://shielded-ocean-66356.herokuapp.com/api/dashboard/add";
   private getPostUrl =
-    "https://shielded-ocean-66356.herokuapp.com/api/dashboard/dashview";
+    "https://shielded-ocean-66356.herokuapp.com/api/dashboard";
   private getPostDashboard =
     "https://shielded-ocean-66356.herokuapp.com/api/dashview";
   startedEdit = new Subject<any>();

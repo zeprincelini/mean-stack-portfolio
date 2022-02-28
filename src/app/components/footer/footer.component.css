@@ -1,8 +1,8 @@
-.footer{
-    text-align: right;
-	color: #5CB85C;
-	position: absolute;
-	bottom: 0;
-	width: 100%;	
-	line-height: 60px;
+.footer {
+  text-align: right;
+  color: #5cb85c;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* line-height: 60px; */
 }

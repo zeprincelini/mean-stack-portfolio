@@ -3,15 +3,34 @@
     <div class="col-sm-12 work-main-header">
       <h1>Portfolio</h1>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- filter -->
+        <div class="filter pull-right" *ngIf="filter">
+          <button mat-button [matMenuTriggerFor]="menu" class="filter-menu">
+            <span>Filter</span>
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="getAllPosts('Web Development')">
+              Website Development
+            </button>
+            <button mat-menu-item (click)="getAllPosts('Graphic Design')">
+              Graphic Design
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
     <div class="loader" *ngIf="loading; else content">
       <mat-progress-bar class="bar" mode="indeterminate"></mat-progress-bar>
     </div>
     <ng-template #content>
       <div class="row">
         <div class="col-sm-12">
-          <div class="row">
+          <div class="row" *ngIf="error; else data">
             <div class="col-sm-4 col-sm-offset-4">
-              <div class="alert alert-danger" *ngIf="error">
+              <div class="alert alert-danger">
                 <div>Error retrieving posts</div>
                 <button class="btn btn-danger" (click)="getAllPosts()">
                   Try again
@@ -19,55 +38,32 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <!-- filter -->
-              <div class="filter pull-right" *ngIf="filter">
-                <button
-                  mat-button
-                  [matMenuTriggerFor]="menu"
-                  class="filter-menu"
-                >
-                  <span>Filter</span>
-                  <mat-icon>filter_list</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button
-                    mat-menu-item
-                    (click)="getAllPosts('Web Development')"
-                  >
-                    Website Development
-                  </button>
-                  <button mat-menu-item (click)="getAllPosts('Graphic Design')">
-                    Graphic Design
-                  </button>
-                </mat-menu>
+
+          <ng-template #data>
+            <div class="panel panel-primary">
+              <div class="row text-center auto-clear">
+                <div class="col-sm-3" *ngFor="let posts of data">
+                  <a href="{{ posts.url }}">
+                    <figure>
+                      <img
+                        src="{{ posts.imageUrl }}"
+                        alt="portfolio images"
+                        *ngIf="posts.title"
+                        width="250px"
+                        height="200px"
+                        class="img-fluid"
+                      />
+                      <figcaption>
+                        {{ posts.title }}
+                        <p>{{ posts.type }}</p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+                <!-- <div class ="clear"> </div> -->
               </div>
             </div>
-          </div>
-          <div class="panel panel-primary">
-            <div class="row text-center auto-clear">
-              <div class="col-sm-3" *ngFor="let posts of data">
-                <a href="{{ posts.url }}">
-                  <figure>
-                    <img
-                      src="{{ posts.imageUrl }}"
-                      alt="portfolio images"
-                      *ngIf="posts.title"
-                      width="250px"
-                      height="200px"
-                      class="img-fluid"
-                    />
-                    <figcaption>
-                      {{ posts.title }}
-                      <p>{{ posts.type }}</p>
-                    </figcaption>
-                  </figure>
-                </a>
-              </div>
-              <!-- <div class ="clear"> </div> -->
-            </div>
-          </div>
+          </ng-template>
         </div>
       </div>
     </ng-template>

@@ -10,14 +10,15 @@ export class SkillsComponent implements OnInit {
     "Html",
     "Css",
     "Javascript",
-    "React Jsx/Tsx",
+    "React",
+    "NextJs",
     "Angular",
     "Chakra-Ui",
     "PrimeReact",
     "Angular Material",
     "Bootstrap",
     "Tailwind",
-    "Node Template Engines",
+    "Styled Components",
   ];
 
   server: string[] = [

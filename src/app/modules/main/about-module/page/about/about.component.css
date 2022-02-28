@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Girassol&family=Roboto+Condensed:wght@300&display=swap");
 
-.about-section {
+/* .about-section {
   background: url(../../../../../../assets/images/ll2.png) top center no-repeat;
   background-size: cover;
   display: table;
   width: 100%;
   box-shadow: inset 0 0 100px #000;
   height: 100vh;
-}
+} */
 
 .main-header h1 {
   text-align: center;

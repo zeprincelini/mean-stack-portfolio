@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router, Event, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: "app-main-layout",
@@ -6,7 +7,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./main-layout.component.css"],
 })
 export class MainLayoutComponent implements OnInit {
-  constructor() {}
+  path: string;
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.path = event.url;
+      }
+    });
+  }
 
   ngOnInit() {}
 }

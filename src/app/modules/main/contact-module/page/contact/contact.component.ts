@@ -17,14 +17,22 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   mailSuccess = false;
   mailError = false;
+  loading = false;
 
   constructor(private contactService: ContactService) {}
 
   ngOnInit() {}
   submit() {
+    this.loading = true;
     this.contactService.mail(this.user).subscribe(
-      (res) => (this.mailSuccess = true),
-      (err) => (this.mailError = true)
+      (res) => {
+        this.mailSuccess = true;
+        this.loading = false;
+      },
+      (err) => {
+        this.mailError = true;
+        this.loading = false;
+      }
     );
     this.contact.reset();
   }

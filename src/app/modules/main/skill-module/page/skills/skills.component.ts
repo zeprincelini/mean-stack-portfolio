@@ -1,15 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-skills',
-  templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+  selector: "app-skills",
+  templateUrl: "./skills.component.html",
+  styleUrls: ["./skills.component.css"],
 })
 export class SkillsComponent implements OnInit {
+  client: string[] = [
+    "Html",
+    "Css",
+    "Javascript",
+    "React Jsx/Tsx",
+    "Angular",
+    "Chakra-Ui",
+    "PrimeReact",
+    "Angular Material",
+    "Bootstrap",
+    "Tailwind",
+    "Node Template Engines",
+  ];
 
-  constructor() { }
+  server: string[] = [
+    "Node Js",
+    "Express JS",
+    "MongoDB",
+    "Mongoose",
+    "Mysql",
+    "Postgres",
+    "Knex",
+    "Sequelize",
+  ];
 
-  ngOnInit() {
-  }
+  design: string[] = ["Adobe Photoshop", "Adobe Illustrator", "Canva"];
 
+  constructor() {}
+
+  ngOnInit() {}
 }

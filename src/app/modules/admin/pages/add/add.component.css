@@ -1,3 +1,7 @@
-.myForm{
-    padding: 15px;
+.myForm {
+  padding: 15px;
+}
+
+.btn .btn-success {
+  width: 100%;
 }

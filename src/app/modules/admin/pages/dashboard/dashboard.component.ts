@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
       );
     });
 
-    this.dashService.getDashboard().subscribe(
+    this.dashService.getPosts().subscribe(
       (res) => console.log(res),
       (err) => {
         if (err instanceof HttpErrorResponse) {

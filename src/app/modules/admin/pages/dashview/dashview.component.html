@@ -1,25 +1,60 @@
 <div class="row">
   <div class="col-sm-12">
-    <div class="alert alert-success" role="alert" *ngIf = "deleteStatus">Post deleted successfully</div>
-    <div class="table-responsive">
-      <table class="table table-striped table-hover text-center">
-        <tr class="myTable">
-          <!-- <th class="text-center">SN</th> -->
-          <th class="text-center">Published</th>
-          <th class="text-center">Title</th>
-          <th class="text-center">Thumbnail</th>
-          <th class="actions text-center">Actions</th>
-        </tr>
-        <tr *ngFor = "let posts of postData">
-          <!-- <td>no</td> -->
-          <td *ngIf ="posts.date">{{posts.date |shorten}}</td>
-          <td>{{posts.title}}</td>
-          <td><img src= "{{posts.imageUrl}}"  alt="not found"
-            *ngIf = "posts.title" width="100px" height="auto"></td>
-          <td><a [routerLink] = "['/edit/', posts._id]"><mat-icon class="edit-icon">create</mat-icon></a>
-            <a (click) = "onDelete(posts._id)" class="del"><mat-icon class="del-icon">delete</mat-icon></a>
-        </tr>
+    <div class="alert alert-success" role="alert" *ngIf="deleteStatus">
+      Post deleted successfully
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+      Error, try again!
+    </div>
+    <div class="full-table mat-elevation-z8">
+      <table mat-table [dataSource]="postData" class="mat-elevation-z8">
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Published</th>
+          <td mat-cell *matCellDef="let posts">{{ posts.date | shorten }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let posts">{{ posts.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="thumbnail">
+          <th mat-header-cell *matHeaderCellDef>Thumbnail</th>
+          <td mat-cell *matCellDef="let posts">
+            <img
+              src="{{ posts.imageUrl }}"
+              alt="post image"
+              *ngIf="posts.title"
+              width="100px"
+              height="auto"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let posts">
+            <a [routerLink]="['/edit/', posts._id]"
+              ><mat-icon class="edit-icon">create</mat-icon></a
+            >
+            <a (click)="onDelete(posts._id)" class="del"
+              ><mat-icon class="del-icon">delete</mat-icon></a
+            >
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
       </table>
+      <mat-paginator
+        #paginator
+        [length]="count"
+        [pageSize]="limit"
+        [pageSizeOptions]="limitOptions"
+        (page)="getAllPosts($event.pageIndex, $event.pageSize)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
     </div>
   </div>
 </div>

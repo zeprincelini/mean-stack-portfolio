@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Subject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DashboardService {
   //dev
@@ -12,29 +12,34 @@ export class DashboardService {
   // private getPostUrl = "http://localhost:3000/api/dashboard/dashview";
 
   //prod
-  private dashboardUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard";
-  private dashPostUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard/add";
-  private getPostUrl = "https://shielded-ocean-66356.herokuapp.com/api/dashboard/dashview";
+  private dashPostUrl =
+    "https://shielded-ocean-66356.herokuapp.com/api/dashboard/add";
+  private getPostUrl =
+    "https://shielded-ocean-66356.herokuapp.com/api/dashboard/dashview";
+  private getPostDashboard =
+    "https://shielded-ocean-66356.herokuapp.com/api/dashview";
   startedEdit = new Subject<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getDashboard(){
-    return this.http.get<any>(this.dashboardUrl);
-  }
-  postDash(body){
+  postDash(body) {
     return this.http.post<any>(this.dashPostUrl, body);
   }
-  getPosts(){
-    return this.http.get<any>(this.getPostUrl); 
+  getPosts(type = "") {
+    return this.http.get<any>(this.getPostUrl, { params: { type } });
   }
-  getPostById(id){
-    return this.http.get<any>(this.getPostUrl + "/" +id);
+  getPostsDashboard(page, limit) {
+    return this.http.get<any>(this.getPostDashboard, {
+      params: { page, limit },
+    });
   }
-  updatePost(id,body){
+  getPostById(id) {
+    return this.http.get<any>(this.getPostUrl + "/" + id);
+  }
+  updatePost(id, body) {
     return this.http.put<any>(this.getPostUrl + "/" + id, body);
   }
-  deletePost(id){
-    return this.http.delete<any>(this.getPostUrl + "/" + id );
+  deletePost(id) {
+    return this.http.delete<any>(this.getPostUrl + "/" + id);
   }
 }

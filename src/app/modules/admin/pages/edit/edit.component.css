@@ -1,10 +1,14 @@
-.myForm{
-    padding: 20px;
+.myForm {
+  padding: 20px;
 }
 
-h1{
-    color: #5CB85C;
-    font-weight: bold;
-    text-align: center;
-    padding: 20px;
+h1 {
+  color: #5cb85c;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+}
+
+.btn .btn-success {
+  width: 100%;
 }

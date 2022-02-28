@@ -63,19 +63,25 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", async (req, res) => {
   let filter = {};
   if (req.query.type) {
     if (req.query.type !== "" && req.query.type.length > 0) {
       filter.type = req.query.type;
     }
   }
-  Post.find(filter, (err, doc) => {
-    if (err) {
-      return res.status(401).json({ error: "failed to retrieve posts" });
-    }
-    return res.status(200).json(doc);
-  });
+  // Post.find(filter, (err, doc) => {
+  //   if (err) {
+  //     return res.status(401).json({ error: "failed to retrieve posts" });
+  //   }
+  //   return res.status(200).json(doc);
+  // });
+  try {
+    const docs = await Post.find(filter).sort({ date: -1 });
+    return res.status(200).json(docs);
+  } catch (err) {
+    return res.status(401).json({ error: err.message });
+  }
 });
 
 router.get("/dashview", verifyToken, async (req, res) => {

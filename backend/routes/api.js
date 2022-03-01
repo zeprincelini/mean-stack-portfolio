@@ -70,12 +70,6 @@ router.get("/dashboard", async (req, res) => {
       filter.type = req.query.type;
     }
   }
-  // Post.find(filter, (err, doc) => {
-  //   if (err) {
-  //     return res.status(401).json({ error: "failed to retrieve posts" });
-  //   }
-  //   return res.status(200).json(doc);
-  // });
   try {
     const docs = await Post.find(filter).sort({ date: -1 });
     return res.status(200).json(docs);
@@ -118,7 +112,7 @@ router.post("/dashboard/add", upload, async (req, res) => {
   }
 });
 
-router.get("/dashboard/dashview/:id", (req, res) => {
+router.get("/dashboard/:id", (req, res) => {
   if (!objectID.isValid(req.params.id)) {
     return res.status(400).send(err + "no post with given id");
   }
@@ -130,7 +124,7 @@ router.get("/dashboard/dashview/:id", (req, res) => {
   });
 });
 
-router.put("/dashboard/dashview/:id", upload, async (req, res) => {
+router.put("/dashboard/:id", upload, async (req, res) => {
   const mydate = new Date();
   if (!objectID.isValid(req.params.id)) {
     return res.status(400).send(err + `no post with given id ${req.params.id}`);
@@ -159,7 +153,7 @@ router.put("/dashboard/dashview/:id", upload, async (req, res) => {
   }
 });
 
-router.delete("/dashboard/dashview/:id", (req, res) => {
+router.delete("/dashboard/:id", (req, res) => {
   if (!objectID.isValid(req.params.id)) {
     return res.status(400).send(err + `no post with given id ${req.params.id}`);
   }

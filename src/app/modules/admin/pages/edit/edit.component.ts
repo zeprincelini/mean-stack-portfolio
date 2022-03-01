@@ -41,7 +41,6 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.currentUrl = this.activeRoute.snapshot.params;
-    console.log(this.currentUrl);
     this.dashService.getPostById(this.currentUrl.id).subscribe((res) => {
       setTimeout(() => {
         this.data = res;

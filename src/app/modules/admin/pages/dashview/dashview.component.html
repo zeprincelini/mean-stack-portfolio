@@ -34,7 +34,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let posts">
-            <a [routerLink]="['/edit/', posts._id]"
+            <a [routerLink]="['/admin/edit/', posts._id]"
               ><mat-icon class="edit-icon">create</mat-icon></a
             >
             <a (click)="onDelete(posts._id)" class="del"

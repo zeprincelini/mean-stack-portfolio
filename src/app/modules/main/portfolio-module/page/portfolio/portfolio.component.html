@@ -44,11 +44,11 @@
           <ng-template #grid>
             <div class="panel panel-primary">
               <div class="row text-center auto-clear">
-                <div class="col-sm-3" *ngFor="let posts of data">
+                <div class="col-sm-3" *ngFor="let posts of datum">
                   <a href="{{ posts.url }}">
                     <figure>
                       <img
-                        *ngIf="source === graphic; else web"
+                        *ngIf="source === 'graphic'; else web"
                         src="{{ posts.imageUrl }}"
                         alt="portfolio images"
                         width="250px"

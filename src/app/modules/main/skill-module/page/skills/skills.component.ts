@@ -19,6 +19,7 @@ export class SkillsComponent implements OnInit {
     "Bootstrap",
     "Tailwind",
     "Styled Components",
+    "Redux Toolkit",
   ];
 
   server: string[] = [

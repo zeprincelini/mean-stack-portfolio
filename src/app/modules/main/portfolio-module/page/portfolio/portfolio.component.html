@@ -32,7 +32,10 @@
             <div class="col-sm-4 col-sm-offset-4">
               <div class="alert alert-danger">
                 <div>Error retrieving posts</div>
-                <button class="btn btn-danger" (click)="getAllPosts()">
+                <button
+                  class="btn btn-danger"
+                  (click)="getAllPosts('Web Development')"
+                >
                   Try again
                 </button>
               </div>
@@ -45,13 +48,28 @@
                   <a href="{{ posts.url }}">
                     <figure>
                       <img
+                        *ngIf="source === graphic; else web"
                         src="{{ posts.imageUrl }}"
                         alt="portfolio images"
-                        *ngIf="posts.title"
                         width="250px"
                         height="200px"
                         class="img-fluid"
                       />
+                      <ng-template #web>
+                        <div class="project">
+                          <img
+                            src="assets/images/project.png"
+                            alt="portfolio images"
+                            width="100%"
+                            height="100%"
+                            *ngIf="posts.title"
+                            class="img-fluid"
+                          />
+                          <div class="view">
+                            <div class="view-content">view project</div>
+                          </div>
+                        </div>
+                      </ng-template>
                       <figcaption>
                         {{ posts.title }}
                         <p>{{ posts.type }}</p>

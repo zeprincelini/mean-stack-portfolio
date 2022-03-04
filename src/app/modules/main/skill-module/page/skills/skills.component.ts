@@ -31,9 +31,15 @@ export class SkillsComponent implements OnInit {
     "Postgres",
     "Knex",
     "Sequelize",
+    "Socket.io",
   ];
 
-  design: string[] = ["Adobe Photoshop", "Adobe Illustrator", "Canva"];
+  design: string[] = [
+    "Adobe Photoshop",
+    "Adobe Illustrator",
+    "Adobe Indesign",
+    "Canva",
+  ];
 
   constructor() {}
 

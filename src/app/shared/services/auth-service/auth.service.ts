@@ -1,19 +1,14 @@
+import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  //dev
-  //private loginUrl = "http://localhost:3000/api/login";
-  // private registerUrl = "http://localhost:3000/api/register";
-
-  //prod
-  private loginUrl = "https://shielded-ocean-66356.herokuapp.com/api/login";
-  private registerUrl =
-    "https://shielded-ocean-66356.herokuapp.com/api/register";
+  private loginUrl = `${environment.BASE_URL}/login`;
+  private registerUrl = `${environment.BASE_URL}/register`;
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -1,24 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Subject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class DashboardService {
-  //dev
-  // private dashboardUrl = "http://localhost:3000/api/dashboard";
-  // private dashPostUrl = "http://localhost:3000/api/dashboard/add";
-  // private getPostUrl = "http://localhost:3000/api/dashboard/dashview";
-
-  //prod
-  private dashPostUrl =
-    "https://shielded-ocean-66356.herokuapp.com/api/dashboard/add";
-  private getPostUrl =
-    "https://shielded-ocean-66356.herokuapp.com/api/dashboard";
-  private getPostDashboard =
-    "https://shielded-ocean-66356.herokuapp.com/api/dashview";
-  startedEdit = new Subject<any>();
+  private dashPostUrl = `${environment.BASE_URL}/dashboard/add`;
+  private getPostUrl = `${environment.BASE_URL}/dashboard`;
+  private getPostDashboard = `${environment.BASE_URL}/dashview`;
 
   constructor(private http: HttpClient) {}
 

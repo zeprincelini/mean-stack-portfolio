@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{qp4f:function(n,o,t){"use strict";t.r(o),t.d(o,"PortfolioModule",function(){return u});var u=function(){return function(){}}()}}]);

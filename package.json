@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng serve",
     "start": "node ./backend/server.js",
-    "build": "ng build",
+    "build": "ng build --base-href /myportfolio",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{KuCd:function(n,u,o){"use strict";o.r(u),o.d(u,"AboutModule",function(){return t});var t=function(){return function(){}}()}}]);

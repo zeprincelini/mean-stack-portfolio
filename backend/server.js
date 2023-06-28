@@ -27,10 +27,12 @@ app.use(
     crossOriginEmbedderPolicy: false,
   })
 );
-app.use(express.static(path.join(__dirname, "../dist")));
+
 app.use("/api", api);
 
-app.get("/*", (_req, res) => {
+app.use(express.static(path.join(__dirname, "../dist/myportfolio")));
+
+app.get(/^\/(?!api).*/, (_req, res) => {
   res.sendFile(path.join(__dirname, "../dist/myportfolio", "index.html"));
 });
 

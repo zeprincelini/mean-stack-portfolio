@@ -93,28 +93,24 @@ router.get("/dashview", verifyToken, async (req, res) => {
   }
 });
 
-router.post(
-  "/dashboard/add",
-  //upload,
-  async (req, res) => {
-    try {
-      const obj = new Post({
-        title: req.body.title,
-        type: req.body.type,
-        url: req.body.url,
-        //imageUrl: req.file.path,
-        imageId: req.file.filename,
-      });
-      await obj.save();
-      res.status("200").json({
-        status: "success",
-        message: "Post created Successfully",
-      });
-    } catch (e) {
-      return res.status(403).json({ error: e.message });
-    }
+router.post("/dashboard/add", upload, async (req, res) => {
+  try {
+    const obj = new Post({
+      title: req.body.title,
+      type: req.body.type,
+      url: req.body.url,
+      imageUrl: req.file.path,
+      imageId: req.file.filename,
+    });
+    await obj.save();
+    res.status("200").json({
+      status: "success",
+      message: "Post created Successfully",
+    });
+  } catch (e) {
+    return res.status(403).json({ error: e.message });
   }
-);
+});
 
 router.get("/dashboard/:id", (req, res) => {
   if (!objectID.isValid(req.params.id)) {

@@ -71,9 +71,9 @@ router.get("/dashboard", async (req, res) => {
     }
   }
   try {
-    const docs = await Post.find(filter).sort({ date: -1 }).lean();
-    const data = docs.sort((a, b) => new Date(b.date) - new Date(a.date));
-    return res.status(200).json(data);
+    const docs = await Post.find(filter).sort({ createdAt: -1 }).lean();
+
+    return res.status(200).json(docs);
   } catch (err) {
     return res.status(401).json({ error: err.message });
   }
@@ -83,6 +83,7 @@ router.get("/dashview", verifyToken, async (req, res) => {
   const { page = 0, limit = 10 } = req.query;
   try {
     const posts = await Post.find()
+      .sort({ createdAt: -1 })
       .limit(limit * 1)
       .skip(page * limit); // (page - 1) * limit but matpaginator starts at index 0
     const totalCount = await Post.count();
@@ -94,13 +95,11 @@ router.get("/dashview", verifyToken, async (req, res) => {
 
 router.post("/dashboard/add", upload, async (req, res) => {
   try {
-    const mydate = new Date();
     const obj = new Post({
       title: req.body.title,
       type: req.body.type,
-      date: mydate,
       url: req.body.url,
-      imageUrl: req.file.path,
+      ...(req.file.path && { imageUrl: req.file.path }),
       imageId: req.file.filename,
     });
     await obj.save();

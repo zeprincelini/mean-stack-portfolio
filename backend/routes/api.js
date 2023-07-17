@@ -71,8 +71,9 @@ router.get("/dashboard", async (req, res) => {
     }
   }
   try {
-    const docs = await Post.find(filter).sort({ date: -1 });
-    return res.status(200).json(docs);
+    const docs = await Post.find(filter).sort({ date: -1 }).lean();
+    const data = docs.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return res.status(200).json(data);
   } catch (err) {
     return res.status(401).json({ error: err.message });
   }
